@@ -7,16 +7,19 @@ function Preview({ listData }) {
   const [currentAddress, setCurrentAddress] = useState({});
   const [zoom, setZoom] = useState(1)
   const [imgStyle, setImageStyle] = useState({})
+  const [isDisplay, setIsDisplay] = useState('block')
 
 
   const selectAddress = (item) => {
     setCurrentAddress(item);
+    setIsDisplay('none')
     setIsShowModal(true);
     setZoom(5)
     const newX = 50 - item.x
     let newY = 50 - item.y
     setImageStyle({
-      transform: `translate(${newX}%, ${newY}%)`
+      transform: `translate(${newX}%, ${newY}%)`,
+      transition: "all 1s ease-in-out"
     })
   };
 
@@ -25,7 +28,8 @@ function Preview({ listData }) {
       <h1>Preview Image</h1>
       <div className="image-bound"
         style={{
-          transform: `scale(${zoom})`
+          transform: `scale(${zoom})`,
+          transition: "all 1s ease-in-out"
         }}
       >
         <img 
@@ -39,12 +43,13 @@ function Preview({ listData }) {
                 style={{
                   position: "absolute",
                   top: `${item.y}%`,
-                  left: `${item.x}%`
+                  left: `${item.x}%`,
+                  transition: "all 1s ease-in-out"
                 }}
               >
                 <h3
                   onClick={() => selectAddress(item)}
-                  style={{ color: "red", cursor: "pointer" }}
+                  style={{ color: "red", cursor: "pointer", display: isDisplay }}
                 >
                   {item.title}
                 </h3>
@@ -61,6 +66,8 @@ function Preview({ listData }) {
           zoom={zoom}
           setZoom={setZoom}
           setImageStyle={setImageStyle}
+          selectAddress={selectAddress}
+          setIsDisplay={setIsDisplay}
         />
       )}
     </div>
