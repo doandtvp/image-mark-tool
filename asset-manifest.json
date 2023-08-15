@@ -1,14 +1,7 @@
 {
-  "files": {
-    "main.css": "/image-mark-tool/static/css/main.02baf4d4.css",
-    "main.js": "/image-mark-tool/static/js/main.f2ffe03c.js",
-    "static/media/map-center-overflow.jpg": "/image-mark-tool/static/media/map-center-overflow.5e326548c9169d2e3919.jpg",
-    "index.html": "/image-mark-tool/index.html",
-    "main.02baf4d4.css.map": "/image-mark-tool/static/css/main.02baf4d4.css.map",
-    "main.f2ffe03c.js.map": "/image-mark-tool/static/js/main.f2ffe03c.js.map"
-  },
-  "entrypoints": [
-    "static/css/main.02baf4d4.css",
-    "static/js/main.f2ffe03c.js"
-  ]
+  "main.css": "static/css/main.2c8ebe68.css",
+  "main.css.map": "static/css/main.2c8ebe68.css.map",
+  "main.js": "static/js/main.0b825da6.js",
+  "main.js.map": "static/js/main.0b825da6.js.map",
+  "static\\media\\map-center-overflow.jpg": "static/media/map-center-overflow.e390ae79.jpg"
 }
