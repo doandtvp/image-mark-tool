@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import img from "../access/img/map-center-overflow.jpg";
 import ModalDetail from "./ModalDetail";
+import { Link } from "react-router-dom";
 
-function Preview({ listData }) {
+function Preview() {
   const [isShowModal, setIsShowModal] = useState(false);
   const [currentAddress, setCurrentAddress] = useState({});
   const [zoom, setZoom] = useState(1)
   const [imgStyle, setImageStyle] = useState({})
   const [isDisplay, setIsDisplay] = useState('block')
-
+  const listData = JSON.parse(localStorage.getItem('lists'))
 
   const selectAddress = (item) => {
     setCurrentAddress(item);
@@ -25,7 +26,12 @@ function Preview({ listData }) {
 
   return (
     <div className="preview-image">
-      <h1>Preview Image</h1>
+      <div className="upload-title">
+        <h1>Preview Image</h1>
+        <Link to='/'>
+          <button>Editor</button>
+        </Link>
+      </div>
       <div className="image-bound"
         style={{
           transform: `scale(${zoom})`,
@@ -37,7 +43,7 @@ function Preview({ listData }) {
           alt="abc" 
           style={imgStyle}
         />
-        {listData.map((item) => (
+        {listData && listData.length > 0 && listData.map((item) => (
           <React.Fragment key={item.x}>
               <div
                 style={{

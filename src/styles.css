@@ -50,6 +50,10 @@ ul {
   padding-left: 20px;
 }
 
+button {
+  cursor: pointer;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -106,6 +110,12 @@ body {
 
 .preview-image {
   position: relative;
+}
+
+.upload-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .upload-image img , .preview-image img {

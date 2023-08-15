@@ -7,8 +7,6 @@ function AddressLabel({ item, editItem, deleteItem }) {
     ref: draggableRef
   });
 
-  console.log({draggableRef})
-
   return (
     <div
       style={{
@@ -27,9 +25,6 @@ function AddressLabel({ item, editItem, deleteItem }) {
       >
         <h3 className="title">{item.title}</h3>
         <div className="btn-group">
-          {/* <div className="edit-btn">
-            <button onClick={() => editItem(item)}>Preview</button>
-          </div> */}
           <div className="edit-btn">
             <button onClick={() => editItem(item)}>Edit</button>
           </div>

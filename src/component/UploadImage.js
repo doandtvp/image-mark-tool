@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import img from "../access/img/map-center-overflow.jpg";
 import ModalUpdateData from "./ModalUpdateData";
 import AddressLabel from "./AddressLabel";
+import { Link } from "react-router-dom";
 
-function UploadImage({ getListData }) {
+function UploadImage() {
   const [x, setX] = useState(-1);
   const [y, setY] = useState(-1);
   const [isShowModal, setIsShowModal] = useState(false);
@@ -13,11 +14,7 @@ function UploadImage({ getListData }) {
     description: "",
   });
   const [currentItem, setCurrentItem] = useState({});
-  const [listData, setListData] = useState([]);
-
-  useEffect(() => {
-    getListData(listData)
-  }, [listData])
+  const [listData, setListData] = useState(JSON.parse(localStorage.getItem('lists')));
 
   const printCoordinates = (e) => {
     const { width, height } = e.target.getBoundingClientRect();
@@ -47,6 +44,7 @@ function UploadImage({ getListData }) {
     };
 
     setListData([...listData, newElement]);
+    localStorage.setItem('lists', JSON.stringify([...listData, newElement]))
     setAddressInfo({
       title: "",
       description: "",
@@ -81,6 +79,7 @@ function UploadImage({ getListData }) {
       description: "",
     });
     setListData(newList);
+    localStorage.setItem('lists', JSON.stringify(newList))
     setIsEdit(false);
     setIsShowModal(false);
   };
@@ -88,6 +87,7 @@ function UploadImage({ getListData }) {
   const deleteItem = (id) => {
     const newArr = listData.filter((item) => item.id !== id);
     setListData(newArr);
+    localStorage.setItem('lists', JSON.stringify(newArr))
     setX(-1);
     setY(-1);
   };
@@ -105,13 +105,17 @@ function UploadImage({ getListData }) {
 
   return (
     <div className="upload-image">
-      <h1>Upload Image</h1>
-      {x}:{y}
+      <div className="upload-title">
+        <h1>Upload Image</h1>
+        <Link to='/preview'>
+          <button>Preview</button>
+        </Link>
+      </div>
       <div className="image-content"
       >
         <div className="image-bound">
           <img onClick={(e) => printCoordinates(e)} src={img} alt="abc" />
-          {listData.length > 0 ? (
+          {listData && listData.length > 0 ? (
             <React.Fragment>
               {listData.map((item) => (
                 <AddressLabel

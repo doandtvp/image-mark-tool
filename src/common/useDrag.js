@@ -38,7 +38,6 @@ export const useDrag = ({ ref, calculateFor = "topLeft" }) => {
 
   const handleMouseUp = (evt) => {
     evt.preventDefault();
-
     setIsDragging(false);
   };
 
@@ -99,7 +98,7 @@ export const useDrag = ({ ref, calculateFor = "topLeft" }) => {
     } = draggableElement.getBoundingClientRect();
 
     updateFinalPosition(
-      width ? boundingWidth : width, // if width null return width else return boundWidth
+      width ? boundingWidth : width,
       height ? boundingHeight : height,
       offsetLeft,
       offsetTop,
