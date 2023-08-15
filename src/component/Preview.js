@@ -54,8 +54,9 @@ function Preview() {
                 }}
               >
                 <h3
+                  className="preview-title"
                   onClick={() => selectAddress(item)}
-                  style={{ color: "red", cursor: "pointer", display: isDisplay }}
+                  style={{ cursor: "pointer", display: isDisplay }}
                 >
                   {item.title}
                 </h3>

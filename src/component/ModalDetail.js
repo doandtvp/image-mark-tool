@@ -1,4 +1,6 @@
 import React, { useEffect } from "react";
+import iconClose from "../access/icons/icon-close.svg";
+import bottle from "../access/img/botte.jpg";
 
 function ModalDetail({
   currentAddress,
@@ -41,16 +43,15 @@ function ModalDetail({
       <div className="modal-content">
         <div className="modal-container">
           <div className="infor-content">
-            <h2>Information</h2>
+            <img className="modal-content-img" src={bottle} alt="img" />
             <div>
-              <h3>Name</h3>
-              <p>{currentAddress.title}</p>
+              <h3 className="modal-content-title">{currentAddress.title}</h3>
             </div>
             <div>
-              <h3>Description</h3>
-              <p>{currentAddress.description}</p>
+              <p className="modal-content-description">{currentAddress.description}</p>
             </div>
           </div>
+
           <div className="img-content"></div>
         </div>
         <div className="slider-button">
@@ -58,7 +59,7 @@ function ModalDetail({
           <button onClick={() => handleGetIndex(true)}>Next</button>
         </div>
         <button className="close-btn" onClick={() => handleCloseModal(false)}>
-          Close
+          <img src={iconClose} />
         </button>
       </div>
 
@@ -71,10 +72,10 @@ function ModalDetail({
         }}
       >
         <h3
+          className="preview-title"
           style={{
-            color: "red",
             cursor: "pointer",
-            transform: `scale(${zoom})`,
+            transform: 'scale(1.7)',
             transition: "all 1s ease-in-out"
           }}
         >
