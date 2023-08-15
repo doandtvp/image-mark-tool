@@ -13,7 +13,7 @@
   "name": "ljg0t8",
   "description": null,
   "version": "0.0.0",
-  "homepage": "https://diegomorningstar.github.io/image-mark-tool/#",
+  "homepage": "https://diegomorningstar.github.io/image-mark-tool/",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
