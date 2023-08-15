@@ -1,7 +1,7 @@
 import React from 'react'
 import UploadImage from './component/UploadImage'
 import Preview from './component/Preview'
-import { HashRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes, HashRouter } from 'react-router-dom'
 
 function App() {
   return (

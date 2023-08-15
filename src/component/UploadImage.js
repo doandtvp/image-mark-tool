@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import img from "../access/img/map-center-overflow.jpg";
 import ModalUpdateData from "./ModalUpdateData";
 import AddressLabel from "./AddressLabel";
@@ -14,7 +14,7 @@ function UploadImage() {
     description: "",
   });
   const [currentItem, setCurrentItem] = useState({});
-  const [listData, setListData] = useState(JSON.parse(localStorage.getItem('lists')));
+  const [listData, setListData] = useState(JSON.parse(localStorage.getItem('lists')) || []);
 
   const printCoordinates = (e) => {
     const { width, height } = e.target.getBoundingClientRect();
@@ -36,7 +36,7 @@ function UploadImage() {
 
   const addToListData = () => {
     const newElement = {
-      id: listData.length + 1,
+      id: listData && listData.length + 1,
       x: x,
       y: y,
       title: addressInfro.title,

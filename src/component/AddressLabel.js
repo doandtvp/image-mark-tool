@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import { useDrag } from "../common/useDrag";
 
 function AddressLabel({ item, editItem, deleteItem }) {
