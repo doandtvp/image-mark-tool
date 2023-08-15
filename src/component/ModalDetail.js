@@ -18,7 +18,6 @@ function ModalDetail({
 
   const handleGetIndex = (isNext) => {
     const currentIndex = listData.findIndex(x => x.id === currentAddress.id);
-    console.log(currentIndex)
     if (isNext) {
       if (currentIndex + 1 < listData.length) {
         setCurrentAddress(listData[currentIndex + 1]);
