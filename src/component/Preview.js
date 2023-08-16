@@ -6,51 +6,55 @@ import { Link } from "react-router-dom";
 function Preview() {
   const [isShowModal, setIsShowModal] = useState(false);
   const [currentAddress, setCurrentAddress] = useState({});
-  const [zoom, setZoom] = useState(1)
-  const [imgStyle, setImageStyle] = useState({})
-  const [isDisplay, setIsDisplay] = useState('block')
-  const listData = JSON.parse(localStorage.getItem('lists'))
+  const [zoom, setZoom] = useState(1);
+  const [imgStyle, setImageStyle] = useState({});
+  const [isDisplay, setIsDisplay] = useState("block");
+  const listData = JSON.parse(localStorage.getItem("lists"));
 
   const selectAddress = (item) => {
     setCurrentAddress(item);
-    setIsDisplay('none')
+    setIsDisplay("none");
     setIsShowModal(true);
-    setZoom(5)
-    const newX = 50 - item.x
-    let newY = 50 - item.y
+    const checkCondition = item.x > 20 && item.x < 80 && item.y > 20 && item.y < 80
+    if (checkCondition) {
+      setZoom(3);
+    } else {
+      setZoom(7);
+    }
+    const newX = 50 - item.x;
+    const newY = 50 - item.y;
     setImageStyle({
-      transform: `translate(${newX}%, ${newY}%)`,
-      transition: "all 1s ease-in-out"
-    })
+      transform: `translate(${checkCondition ? newX + 8 : newX + 4}%, ${checkCondition ? newY - 4 : newY - 2}%)`,
+      transition: "all 1s ease-in-out",
+    });
   };
 
   return (
     <div className="preview-image">
       <div className="upload-title">
         <h1>Preview Image</h1>
-        <Link to='/'>
+        <Link to="/">
           <button>Editor</button>
         </Link>
       </div>
-      <div className="image-bound"
+      <div
+        className="image-bound"
         style={{
           transform: `scale(${zoom})`,
-          transition: "all 1s ease-in-out"
+          transition: "all 1s ease-in-out",
         }}
       >
-        <img 
-          src={img} 
-          alt="abc" 
-          style={imgStyle}
-        />
-        {listData && listData.length > 0 && listData.map((item) => (
-          <React.Fragment key={item.x}>
+        <img src={img} alt="abc" style={imgStyle} />
+        {listData &&
+          listData.length > 0 &&
+          listData.map((item) => (
+            <React.Fragment key={item.x}>
               <div
                 style={{
                   position: "absolute",
                   top: `${item.y}%`,
                   left: `${item.x}%`,
-                  transition: "all 1s ease-in-out"
+                  transition: "all 1s ease-in-out",
                 }}
               >
                 <h3
@@ -61,8 +65,8 @@ function Preview() {
                   {item.title}
                 </h3>
               </div>
-          </React.Fragment>
-        ))}
+            </React.Fragment>
+          ))}
       </div>
       {isShowModal && (
         <ModalDetail

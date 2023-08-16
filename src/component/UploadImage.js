@@ -107,6 +107,7 @@ function UploadImage() {
     <div className="upload-image">
       <div className="upload-title">
         <h1>Upload Image</h1>
+        {x}:{y}
         <Link to='/preview'>
           <button>Preview</button>
         </Link>
