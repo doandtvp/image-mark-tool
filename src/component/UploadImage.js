@@ -41,6 +41,10 @@ function UploadImage() {
       y: y,
       title: addressInfro.title,
       description: addressInfro.description,
+      addressPosititon: {
+        x: 10,
+        y: 15
+      }
     };
 
     setListData([...listData, newElement]);
@@ -123,6 +127,8 @@ function UploadImage() {
                   item={item}
                   editItem={getEditItem}
                   deleteItem={deleteItem}
+                  listData={listData}
+                  setListData={setListData}
                 />
               ))}
             </React.Fragment>

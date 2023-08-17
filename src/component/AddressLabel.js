@@ -1,11 +1,32 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDrag } from "../common/useDrag";
 
-function AddressLabel({ item, editItem, deleteItem }) {
+function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
   const draggableRef = useRef(null);
   const { position, handleMouseDown } = useDrag({
     ref: draggableRef
   });
+
+  useEffect(() => {
+    if (position.x && position.y) {
+      const newList = listData.map((location) => {
+        if (location.id === item.id) {
+          location.addressPosititon = {
+            x: position.x,
+            y: position.y
+          }
+        }
+        return location
+      })
+  
+      setListData(newList);
+      localStorage.setItem('lists', JSON.stringify(newList))
+    }
+  },[position])
+
+  const handleDrag = (e) => {
+    handleMouseDown(e)
+  }
 
   return (
     <div
@@ -17,10 +38,10 @@ function AddressLabel({ item, editItem, deleteItem }) {
     >
       <div className="address-label"
         ref={draggableRef}
-        onMouseDown={handleMouseDown}
+        onMouseDown={(e) => handleDrag(e)}
         style={{
-          top: position.y,
-          left: position.x
+          top: item.addressPosititon.y,
+          left: item.addressPosititon.x
         }}
       >
         <h3 className="title">{item.title}</h3>

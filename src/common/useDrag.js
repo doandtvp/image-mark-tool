@@ -9,28 +9,15 @@ export const useDrag = ({ ref, calculateFor = "topLeft" }) => {
     (width, height, x, y) => {
       if (calculateFor === "bottomRight") {
         setFinalPosition({
-          x: Math.max(
-            Math.min(
-              window.innerWidth - width,
-              window.innerWidth - (x + width),
-            ),
-            0,
-          ),
-          y: Math.max(
-            Math.min(
-              window.innerHeight - height,
-              window.innerHeight - (y + height),
-            ),
-            0,
-          ),
+          x: Math.max(Math.min(x, window.innerWidth - width), 0),
+          y: Math.max(Math.min(y, window.innerHeight - height), 0),
         });
-
         return;
       }
 
       setFinalPosition({
-        x: Math.min(Math.max(0, x), window.innerWidth - width),
-        y: Math.min(Math.max(0, y), window.innerHeight - height),
+        x,
+        y,
       });
     },
     [calculateFor],
@@ -51,17 +38,14 @@ export const useDrag = ({ ref, calculateFor = "topLeft" }) => {
       return;
     }
 
-    const { width, height } =
-      draggableElement.getBoundingClientRect();
-
-      const { offsetTop, offsetLeft } = ref.current
+    const { width, height } = draggableElement.getBoundingClientRect();
 
     setIsDragging(true);
     setDragInfo({
       startX: clientX,
       startY: clientY,
-      top: offsetTop,
-      left: offsetLeft,
+      top: draggableElement.offsetTop,
+      left: draggableElement.offsetLeft,
       width,
       height,
     });
@@ -76,7 +60,6 @@ export const useDrag = ({ ref, calculateFor = "topLeft" }) => {
       evt.preventDefault();
 
       const { clientX, clientY } = evt;
-
       const position = {
         x: dragInfo.startX - clientX,
         y: dragInfo.startY - clientY,
@@ -91,15 +74,14 @@ export const useDrag = ({ ref, calculateFor = "topLeft" }) => {
 
   const recalculate = (width, height) => {
     const { current: draggableElement } = ref;
-    const { offsetTop, offsetLeft } = ref.current
-    const {
-      width: boundingWidth,
-      height: boundingHeight,
-    } = draggableElement.getBoundingClientRect();
+
+    if (!draggableElement) return;
+
+    const { offsetTop, offsetLeft } = draggableElement;
 
     updateFinalPosition(
-      width ? boundingWidth : width,
-      height ? boundingHeight : height,
+      width ? draggableElement.offsetWidth : width,
+      height ? draggableElement.offsetHeight : height,
       offsetLeft,
       offsetTop,
     );

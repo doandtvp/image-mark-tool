@@ -55,15 +55,24 @@ function Preview() {
                   top: `${item.y}%`,
                   left: `${item.x}%`,
                   transition: "all 1s ease-in-out",
+                  width: "100%"
                 }}
               >
-                <h3
-                  className="preview-title"
-                  onClick={() => selectAddress(item)}
-                  style={{ cursor: "pointer", display: isDisplay }}
-                >
-                  {item.title}
-                </h3>
+                <div>
+                  <div className="white-mark"></div>
+                  <h3
+                    className="preview-title"
+                    onClick={() => selectAddress(item)}
+                    style={{ 
+                      cursor: "pointer", 
+                      display: isDisplay,
+                      top: item.addressPosititon.y,
+                      left: item.addressPosititon.x
+                    }}
+                  >
+                    {item.title}
+                  </h3>
+                </div>
               </div>
             </React.Fragment>
           ))}
