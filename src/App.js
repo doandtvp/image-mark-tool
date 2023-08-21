@@ -1,6 +1,6 @@
 import React from 'react'
-import UploadImage from './component/UploadImage'
-import Preview from './component/Preview'
+import UploadImage from './component/UploadImage/UploadImage'
+import Preview from './component/Preview/Preview'
 import { Route, Routes, BrowserRouter } from 'react-router-dom'
 
 function App() {

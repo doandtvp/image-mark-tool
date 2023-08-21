@@ -1,7 +1,8 @@
 import React, { useEffect } from "react";
-import iconClose from "../access/icons/icon-close.svg";
-import bottle from "../access/img/botte.jpg";
-import arrow from "../access/icons/icon-arrow.png";
+import iconClose from "../../access/icons/icon-close.svg";
+import bottle from "../../access/img/botte.jpg";
+import arrow from "../../access/icons/icon-arrow.png";
+import "./ModalDetail.css";
 
 function ModalDetail({
   currentAddress,
@@ -112,6 +113,7 @@ function ModalDetail({
           top: "50%",
           left: "50%",
           transition: "all 1s ease-in-out",
+          width: "100%"
         }}
       >
         <h3

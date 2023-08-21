@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import img from "../access/img/map-center-overflow.jpg";
-import ModalDetail from "./ModalDetail";
+import img from "../../access/img/map-center-overflow.jpg";
+import ModalDetail from "../ModalDetail/ModalDetail";
 import { Link } from "react-router-dom";
+import './Preview.css'
 
 function Preview() {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -19,12 +20,12 @@ function Preview() {
     if (checkCondition) {
       setZoom(3);
     } else {
-      setZoom(7);
+      setZoom(8);
     }
     const newX = 50 - item.x;
     const newY = 50 - item.y;
     setImageStyle({
-      transform: `translate(${checkCondition ? newX + 8 : newX + 4}%, ${checkCondition ? newY - 4 : newY - 2}%)`,
+      transform: `translate(${checkCondition ? newX + 8 : newX + 3}%, ${checkCondition ? newY - 4 : newY - 3}%)`,
       transition: "all 1s ease-in-out",
     });
   };
@@ -48,14 +49,15 @@ function Preview() {
         {listData &&
           listData.length > 0 &&
           listData.map((item) => (
-            <React.Fragment key={item.x}>
+            <React.Fragment key={item.id}>
               <div
                 style={{
                   position: "absolute",
                   top: `${item.y}%`,
                   left: `${item.x}%`,
                   transition: "all 1s ease-in-out",
-                  width: "100%"
+                  width: "100%",
+                  display: isDisplay
                 }}
               >
                 <div>
@@ -65,7 +67,6 @@ function Preview() {
                     onClick={() => selectAddress(item)}
                     style={{ 
                       cursor: "pointer", 
-                      display: isDisplay,
                       top: item.addressPosititon.y,
                       left: item.addressPosititon.x
                     }}

@@ -1,4 +1,5 @@
 import React from "react";
+import "./ModalUpdateData.css";
 
 function ModalUpdateData(props) {
 

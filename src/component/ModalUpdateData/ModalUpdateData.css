@@ -1,0 +1,32 @@
+.data-form {
+    max-width: 300px;
+    width: 100%;
+    border-radius: 8px;
+    background: white;
+    padding: 20px;
+    z-index: 10;
+}
+
+.data-form input, .data-form textarea {
+    width: 100%;
+}
+
+.data-form .btn-group {
+    margin-top: 20px;
+}
+
+.data-form .btn-group button {
+    margin-right: 10px;
+}
+
+.data-form .data-fields {
+    margin-bottom: 20px;
+}
+
+.image-content {
+    position: relative;
+}
+
+.data-form {
+    position: absolute;
+}

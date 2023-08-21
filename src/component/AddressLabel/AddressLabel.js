@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useDrag } from "../common/useDrag";
+import { useDrag } from "../../common/useDrag";
+import "./AddressLabel.css";
 
 function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
   const draggableRef = useRef(null);

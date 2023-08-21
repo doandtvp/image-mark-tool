@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import img from "../access/img/map-center-overflow.jpg";
-import ModalUpdateData from "./ModalUpdateData";
-import AddressLabel from "./AddressLabel";
+import img from "../../access/img/map-center-overflow.jpg";
+import ModalUpdateData from "../ModalUpdateData/ModalUpdateData";
+import AddressLabel from "../AddressLabel/AddressLabel";
 import { Link } from "react-router-dom";
+import './UploadImage.css'
 
 function UploadImage() {
   const [x, setX] = useState(-1);
