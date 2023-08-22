@@ -28,6 +28,7 @@ function ModalUpdateData(props) {
           type="text"
           name="title"
           value={addressInfro.title}
+          autoFocus
           onChange={(e) => handleChange(e)}
         />
       </div>

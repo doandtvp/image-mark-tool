@@ -16,6 +16,7 @@ function UploadImage() {
   });
   const [currentItem, setCurrentItem] = useState({});
   const [listData, setListData] = useState(JSON.parse(localStorage.getItem('lists')) || []);
+  const [listDots, setListDots] = useState([]);
 
   const printCoordinates = (e) => {
     const { width, height } = e.target.getBoundingClientRect();
@@ -23,6 +24,7 @@ function UploadImage() {
     setX(Math.round((offsetX / width) * 100));
     setY(Math.round((offsetY / height) * 100));
     setIsShowModal(true);
+    setListDots([{x: Math.round((offsetX / width) * 100), y: Math.round((offsetY / height) * 100)}])
   };
 
   const handleChange = (e) => {
@@ -102,6 +104,7 @@ function UploadImage() {
       setIsEdit(false);
     }
     setIsShowModal(false);
+    setListDots([])
     setAddressInfo({
       title: "",
       description: "",
@@ -121,7 +124,18 @@ function UploadImage() {
       >
         <div className="image-bound">
           <img onClick={(e) => printCoordinates(e)} src={img} alt="abc" />
-          {listData && listData.length > 0 ? (
+          {listDots && listDots.length > 0 && listDots.map((item) =>(
+            <div
+            style={{
+              position: "absolute",
+              top: `${item.y}%`,
+              left: `${item.x}%`,
+            }}
+          >
+            <div className="dot"></div>
+          </div>
+          ))}
+          {listData && listData.length > 0 && (
             <React.Fragment>
               {listData.map((item) => (
                 <AddressLabel
@@ -133,15 +147,6 @@ function UploadImage() {
                 />
               ))}
             </React.Fragment>
-          ) : (
-            <div
-              className="dot"
-              style={{    
-                position: "absolute",
-                top: `${y}%`,
-                left: `${x}%`,
-              }}
-            ></div>
           )}
         </div>
         {isShowModal && (
