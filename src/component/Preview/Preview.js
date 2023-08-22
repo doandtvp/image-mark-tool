@@ -3,6 +3,7 @@ import img from "../../access/img/map-center-overflow.jpg";
 import ModalDetail from "../ModalDetail/ModalDetail";
 import { Link } from "react-router-dom";
 import './Preview.css'
+import Line from "../Line";
 
 function Preview() {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -61,7 +62,10 @@ function Preview() {
                 }}
               >
                 <div>
-                  <div className="white-mark"></div>
+                  <Line
+                    source={{x:0, y:0}}
+                    target={item.addressPosititon}
+                  />
                   <h3
                     className="preview-title"
                     onClick={() => selectAddress(item)}
