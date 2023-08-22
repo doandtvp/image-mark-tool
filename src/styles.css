@@ -205,4 +205,6 @@ body {
   background: white;
   border-radius: 50%;
   margin-left: -4px;
+  position: absolute;
+  top: -4px;
 }

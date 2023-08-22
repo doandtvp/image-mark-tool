@@ -4,6 +4,7 @@ import ModalDetail from "../ModalDetail/ModalDetail";
 import { Link } from "react-router-dom";
 import './Preview.css'
 import Line from "../Line";
+import MobileList from "../MobileList/MobileList";
 
 function Preview() {
   const [isShowModal, setIsShowModal] = useState(false);
@@ -50,7 +51,7 @@ function Preview() {
         {listData &&
           listData.length > 0 &&
           listData.map((item) => (
-            <React.Fragment key={item.id}>
+            <div className="preview-wraper" key={item.id}>
               <div
                 style={{
                   position: "absolute",
@@ -62,9 +63,11 @@ function Preview() {
                 }}
               >
                 <div>
+                  <div className="white-mark"></div>
                   <Line
                     source={{x:0, y:0}}
                     target={item.addressPosititon}
+                    pointSize={7}
                   />
                   <h3
                     className="preview-title"
@@ -79,7 +82,7 @@ function Preview() {
                   </h3>
                 </div>
               </div>
-            </React.Fragment>
+            </div>
           ))}
       </div>
       {isShowModal && (
@@ -95,6 +98,9 @@ function Preview() {
           setIsDisplay={setIsDisplay}
         />
       )}
+      <MobileList
+        listData={listData}
+      />
     </div>
   );
 }

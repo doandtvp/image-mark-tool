@@ -3,6 +3,7 @@ import iconClose from "../../access/icons/icon-close.svg";
 import bottle from "../../access/img/botte.jpg";
 import arrow from "../../access/icons/icon-arrow.png";
 import "./ModalDetail.css";
+import Line from "../Line";
 
 function ModalDetail({
   currentAddress,
@@ -67,7 +68,13 @@ function ModalDetail({
               </div>
             </div>
             <div>
-              <p className={currentAddress.description.length > 150 ? "modal-content-description" : "modal-content-less-description"}>
+              <p
+                className={
+                  currentAddress.description.length > 150
+                    ? "modal-content-description"
+                    : "modal-content-less-description"
+                }
+              >
                 {currentAddress.description}
               </p>
             </div>
@@ -84,34 +91,34 @@ function ModalDetail({
       </div>
       {listData.length > 1 && (
         <div className="slider-button">
-        <div className="group-btn" onClick={() => handleGetIndex(false)}>
-          <button>
-            <img src={arrow} alt="arrow" />
-          </button>
-          <p>
-            {currentIndex === 0
-              ? listData[listData.length - 1].title
-              : listData[currentIndex - 1].title}
-          </p>
+          <div className="group-btn" onClick={() => handleGetIndex(false)}>
+            <button>
+              <img src={arrow} alt="arrow" />
+            </button>
+            <p>
+              {currentIndex === 0
+                ? listData[listData.length - 1].title
+                : listData[currentIndex - 1].title}
+            </p>
+          </div>
+          <div className="group-btn" onClick={() => handleGetIndex(true)}>
+            <p>
+              {currentIndex + 1 === listData.length
+                ? listData[0].title
+                : listData[currentIndex + 1].title}
+            </p>
+            <button>
+              <img src={arrow} alt="arrow" />
+            </button>
+          </div>
         </div>
-        <div className="group-btn" onClick={() => handleGetIndex(true)}>
-          <p>
-            {currentIndex + 1 === listData.length
-              ? listData[0].title
-              : listData[currentIndex + 1].title}
-          </p>
-          <button>
-            <img src={arrow} alt="arrow" />
-          </button>
-        </div>
-      </div>
       )}
 
-      <div
+      {/* <div
         style={{
           position: "absolute",
-          top: "50%",
-          left: "50%",
+          top: `${50 + Math.abs((50 - currentAddress.y) - 4)}%`,
+          left: `${50 +  Math.abs((50 - currentAddress.x) + 8)}%`,
           transition: "all 1s ease-in-out",
           width: "100%"
         }}
@@ -126,6 +133,35 @@ function ModalDetail({
         >
           {currentAddress.title}
         </h3>
+      </div> */}
+
+      <div
+        style={{
+          position: "absolute",
+          top: `${50 + Math.abs((50 - currentAddress.y) - 4)}%`,
+          left: `${50 + Math.abs((50 - currentAddress.x) + 8)}%`,
+          transition: "all 1s ease-in-out",
+          width: "100%",
+        }}
+      >
+        <div>
+          <div className="white-mark"></div>
+          <Line
+            source={{ x: 0, y: 0 }}
+            target={currentAddress.addressPosititon}
+            pointSize={7}
+          />
+          <h3
+            className="preview-title"
+            style={{
+              cursor: "pointer",
+              top: currentAddress.addressPosititon.y,
+              left: currentAddress.addressPosititon.x,
+            }}
+          >
+            {currentAddress.title}
+          </h3>
+        </div>
       </div>
     </div>
   );

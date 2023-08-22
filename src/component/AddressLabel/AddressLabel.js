@@ -48,10 +48,10 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
         <h3 className="title">{item.title}</h3>
         <div className="btn-group">
           <div className="edit-btn">
-            <button onClick={() => editItem(item)}>Edit</button>
+            <button onClick={() => editItem(item)}>Chỉnh Sửa</button>
           </div>
           <div className="delete-btn">
-            <button onClick={() => deleteItem(item.id)}>Delete</button>
+            <button onClick={() => deleteItem(item.id)}>Xóa</button>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Line({ source, target }) {
+function Line({ source, target, pointSize = 7 }) {
   const [position, setPosition] = useState("bottom-right");
 
   useEffect(() => {
@@ -45,7 +45,6 @@ function Line({ source, target }) {
             x2={target.x}
             y2={target.y}
             stroke="#FFFFFF"
-            markerStart="url(#circle)"
           />
         </svg>
       )}
@@ -78,7 +77,6 @@ function Line({ source, target }) {
             x2={target.x}
             y2={target.y + 37.5}
             stroke="#FFFFFF"
-            markerStart="url(#circle)"
           />
         </svg>
       )}
@@ -111,7 +109,6 @@ function Line({ source, target }) {
             x2={target.x}
             y2={target.y + target.y / 2}
             stroke="#FFFFFF"
-            markerStart="url(#circle)"
           />
         </svg>
       )}
@@ -144,7 +141,6 @@ function Line({ source, target }) {
             x2={target.x + (target.x / 4 * -1 )}
             y2={target.y + 37.5}
             stroke="#FFFFFF"
-            markerStart="url(#circle)"
           />
         </svg>
       )}

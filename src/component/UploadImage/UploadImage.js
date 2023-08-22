@@ -136,7 +136,7 @@ function UploadImage() {
           ) : (
             <div
               className="dot"
-              style={{
+              style={{    
                 position: "absolute",
                 top: `${y}%`,
                 left: `${x}%`,

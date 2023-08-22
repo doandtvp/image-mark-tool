@@ -23,7 +23,7 @@ function ModalUpdateData(props) {
       }}
     >
       <div className="data-fields">
-        <h3>Title</h3>
+        <h3>Tiêu Đề</h3>
         <input
           type="text"
           name="title"
@@ -32,7 +32,7 @@ function ModalUpdateData(props) {
         />
       </div>
       <div className="data-fields">
-        <h3>Description</h3>
+        <h3>Mô Tả</h3>
         <textarea
           value={addressInfro.description}
           onChange={(e) => handleChange(e)}
@@ -40,11 +40,11 @@ function ModalUpdateData(props) {
         ></textarea>
       </div>
       <div className="btn-group">
-        <button onClick={handleCloseModal}>Cancel</button>
+        <button onClick={handleCloseModal}>Hủy Bỏ</button>
         {isEdit ? (
-          <button onClick={handleEdit}>Edit Data</button>
+          <button onClick={handleEdit}>Chỉnh Sửa</button>
         ) : (
-          <button onClick={addToListData}>Save Data</button>
+          <button onClick={addToListData}>Lưu Lại</button>
         )}
       </div>
     </div>
