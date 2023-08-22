@@ -1,14 +1,11 @@
 .address-label {
-    padding: 20px;
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
-    background: white;
-    border-radius: 8px;
     position: absolute;
     max-width: 200px;
     width: 200px;
+    z-index: 20;
 }
   
 .address-label:hover {
@@ -17,8 +14,14 @@
 
 .address-label .title {
     width: 100%;
-    text-align: center;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
+    font-family: 'Silk Serif Regular';
+    font-weight: 300;
+    font-size: 25px;
+    line-height: 37.5px;
+    text-transform: uppercase;
+    color: white;
+    letter-spacing: 7px;
 }
 
 .address-label .btn-group {
@@ -28,5 +31,5 @@
 }
 
 .address-label .btn-group button {
-    margin: 0 5px;
+    margin: 0 5px 0 0;
 }

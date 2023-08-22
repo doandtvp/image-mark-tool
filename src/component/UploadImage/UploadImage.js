@@ -132,7 +132,7 @@ function UploadImage() {
               left: `${item.x}%`,
             }}
           >
-            <div className="dot"></div>
+            <div className="white-mark"></div>
           </div>
           ))}
           {listData && listData.length > 0 && (

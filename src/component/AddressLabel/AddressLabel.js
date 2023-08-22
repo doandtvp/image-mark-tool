@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useDrag } from "../../common/useDrag";
 import "./AddressLabel.css";
+import Line from "../Line";
 
 function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
   const draggableRef = useRef(null);
@@ -55,7 +56,12 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
           </div>
         </div>
       </div>
-      <div className="dot"></div>
+      <Line
+        source={{x:0, y:0}}
+        target={item.addressPosititon}
+        pointSize={7}
+      />
+      <div className="white-mark"></div>
     </div>
   );
 }
