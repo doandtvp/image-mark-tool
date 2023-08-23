@@ -4,6 +4,7 @@ import ModalUpdateData from "../ModalUpdateData/ModalUpdateData";
 import AddressLabel from "../AddressLabel/AddressLabel";
 import { Link } from "react-router-dom";
 import './UploadImage.css'
+import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 
 function UploadImage() {
   const [x, setX] = useState(-1);
@@ -17,6 +18,8 @@ function UploadImage() {
   const [currentItem, setCurrentItem] = useState({});
   const [listData, setListData] = useState(JSON.parse(localStorage.getItem('lists')) || []);
   const [listDots, setListDots] = useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [currentId, setCurrentId] = useState(0)
 
   const printCoordinates = (e) => {
     const { width, height } = e.target.getBoundingClientRect();
@@ -91,12 +94,19 @@ function UploadImage() {
     setIsShowModal(false);
   };
 
-  const deleteItem = (id) => {
-    const newArr = listData.filter((item) => item.id !== id);
+  const deleteItem = (id, isShow) => {
+    setCurrentId(id)
+    setShowDeleteModal(isShow)
+  };
+
+  const confirmDeleteItem = () => {
+    const newArr = listData.filter((item) => item.id !== currentId);
     setListData(newArr);
     localStorage.setItem('lists', JSON.stringify(newArr))
     setX(-1);
     setY(-1);
+    setShowDeleteModal(false)
+    setCurrentId(0)
   };
 
   const handleCloseModal = () => {
@@ -161,6 +171,12 @@ function UploadImage() {
             addToListData={addToListData}
           />
         )}
+        {showDeleteModal && 
+          <ModalConfirmDelete
+            confirmDeleteItem={confirmDeleteItem}
+            setShowDeleteModal={setShowDeleteModal}
+          />
+        }
       </div>
     </div>
   );

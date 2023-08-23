@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDrag } from "../../common/useDrag";
 import "./AddressLabel.css";
 import Line from "../Line";
 
 function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
+  const [showControl, setShowControl] = useState(false)
   const draggableRef = useRef(null);
   const { position, handleMouseDown } = useDrag({
     ref: draggableRef
@@ -37,6 +38,7 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
         top: `${item.y}%`,
         left: `${item.x}%`,
       }}
+      
     >
       <div className="address-label"
         ref={draggableRef}
@@ -45,16 +47,24 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
           top: item.addressPosititon.y,
           left: item.addressPosititon.x
         }}
+        onMouseOver={()=>setShowControl(true)}
+      onMouseLeave={()=>setShowControl(false)}
       >
-        <h3 className="title">{item.title}</h3>
-        <div className="btn-group">
-          <div className="edit-btn">
-            <button onClick={() => editItem(item)}>Chỉnh Sửa</button>
+        <h3 
+          className="title"
+        >
+          {item.title}
+        </h3>
+        {showControl && (
+          <div className="btn-group">
+            <div className="edit-btn">
+              <button onClick={() => editItem(item)}>Chỉnh Sửa</button>
+            </div>
+            <div className="delete-btn">
+              <button onClick={() => deleteItem(item.id, true)}>Xóa</button>
+            </div>
           </div>
-          <div className="delete-btn">
-            <button onClick={() => deleteItem(item.id)}>Xóa</button>
-          </div>
-        </div>
+        )}
       </div>
       <Line
         source={{x:0, y:0}}
