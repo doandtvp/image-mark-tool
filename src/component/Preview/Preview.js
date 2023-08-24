@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import img from "../../access/img/map-center-overflow.jpg";
 import ModalDetail from "../ModalDetail/ModalDetail";
 import { Link } from "react-router-dom";
@@ -13,6 +13,7 @@ function Preview() {
   const [imgStyle, setImageStyle] = useState({});
   const [isDisplay, setIsDisplay] = useState("block");
   const listData = JSON.parse(localStorage.getItem("lists"));
+  const titleRef = useRef({})
 
   const selectAddress = (item) => {
     setCurrentAddress(item);
@@ -67,10 +68,11 @@ function Preview() {
                   <Line
                     source={{x:0, y:0}}
                     target={item.addressPosititon}
-                    pointSize={7}
+                    titleRef={titleRef}
                   />
                   <h3
                     className="preview-title"
+                    ref={titleRef}
                     onClick={() => selectAddress(item)}
                     style={{ 
                       cursor: "pointer", 

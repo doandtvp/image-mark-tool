@@ -3,31 +3,40 @@ import img from "../../access/img/map-center-overflow.jpg";
 import ModalUpdateData from "../ModalUpdateData/ModalUpdateData";
 import AddressLabel from "../AddressLabel/AddressLabel";
 import { Link } from "react-router-dom";
-import './UploadImage.css'
+import "./UploadImage.css";
 import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 
 function UploadImage() {
   const [x, setX] = useState(-1);
   const [y, setY] = useState(-1);
+  const [currentId, setCurrentId] = useState(0);
   const [isShowModal, setIsShowModal] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [currentItem, setCurrentItem] = useState({});
+  const [listDots, setListDots] = useState([]);
+  const [listData, setListData] = useState(
+    JSON.parse(localStorage.getItem("lists")) || [],
+  );
   const [addressInfro, setAddressInfo] = useState({
     title: "",
     description: "",
   });
-  const [currentItem, setCurrentItem] = useState({});
-  const [listData, setListData] = useState(JSON.parse(localStorage.getItem('lists')) || []);
-  const [listDots, setListDots] = useState([]);
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const [currentId, setCurrentId] = useState(0)
 
   const printCoordinates = (e) => {
-    const { width, height } = e.target.getBoundingClientRect();
-    const { offsetX, offsetY } = e.nativeEvent;
-    setX(Math.round((offsetX / width) * 100));
-    setY(Math.round((offsetY / height) * 100));
-    setIsShowModal(true);
-    setListDots([{x: Math.round((offsetX / width) * 100), y: Math.round((offsetY / height) * 100)}])
+    if (!isEdit) {
+      const { width, height } = e.target.getBoundingClientRect();
+      const { offsetX, offsetY } = e.nativeEvent;
+      setX(Math.round((offsetX / width) * 100));
+      setY(Math.round((offsetY / height) * 100));
+      setIsShowModal(true);
+      setListDots([
+        {
+          x: Math.round((offsetX / width) * 100),
+          y: Math.round((offsetY / height) * 100),
+        },
+      ]);
+    }
   };
 
   const handleChange = (e) => {
@@ -48,13 +57,13 @@ function UploadImage() {
       title: addressInfro.title,
       description: addressInfro.description,
       addressPosititon: {
-        x: 10,
-        y: 15
-      }
+        x: 20,
+        y: 25,
+      },
     };
 
     setListData([...listData, newElement]);
-    localStorage.setItem('lists', JSON.stringify([...listData, newElement]))
+    localStorage.setItem("lists", JSON.stringify([...listData, newElement]));
     setAddressInfo({
       title: "",
       description: "",
@@ -65,6 +74,7 @@ function UploadImage() {
   const getEditItem = (item) => {
     setIsShowModal(true);
     setIsEdit(true);
+    setListDots([]);
     setX(item.x);
     setY(item.y);
     setAddressInfo({
@@ -89,24 +99,24 @@ function UploadImage() {
       description: "",
     });
     setListData(newList);
-    localStorage.setItem('lists', JSON.stringify(newList))
+    localStorage.setItem("lists", JSON.stringify(newList));
     setIsEdit(false);
     setIsShowModal(false);
   };
 
   const deleteItem = (id, isShow) => {
-    setCurrentId(id)
-    setShowDeleteModal(isShow)
+    setCurrentId(id);
+    setShowDeleteModal(isShow);
   };
 
   const confirmDeleteItem = () => {
     const newArr = listData.filter((item) => item.id !== currentId);
     setListData(newArr);
-    localStorage.setItem('lists', JSON.stringify(newArr))
+    localStorage.setItem("lists", JSON.stringify(newArr));
     setX(-1);
     setY(-1);
-    setShowDeleteModal(false)
-    setCurrentId(0)
+    setShowDeleteModal(false);
+    setCurrentId(0);
   };
 
   const handleCloseModal = () => {
@@ -114,7 +124,7 @@ function UploadImage() {
       setIsEdit(false);
     }
     setIsShowModal(false);
-    setListDots([])
+    setListDots([]);
     setAddressInfo({
       title: "",
       description: "",
@@ -125,26 +135,27 @@ function UploadImage() {
     <div className="upload-image">
       <div className="upload-title">
         <h1>Upload Image</h1>
-        {x}:{y}
-        <Link to='/preview'>
+        <Link to="/preview">
           <button>Preview</button>
         </Link>
       </div>
-      <div className="image-content"
-      >
+      <div className="image-content">
         <div className="image-bound">
           <img onClick={(e) => printCoordinates(e)} src={img} alt="abc" />
-          {listDots && listDots.length > 0 && listDots.map((item) =>(
-            <div
-            style={{
-              position: "absolute",
-              top: `${item.y}%`,
-              left: `${item.x}%`,
-            }}
-          >
-            <div className="white-mark"></div>
-          </div>
-          ))}
+          {listDots &&
+            listDots.length > 0 &&
+            listDots.map((item, index) => (
+              <div
+                style={{
+                  position: "absolute",
+                  top: `${item.y}%`,
+                  left: `${item.x}%`,
+                }}
+                key={index}
+              >
+                <div className="white-mark"></div>
+              </div>
+            ))}
           {listData && listData.length > 0 && (
             <React.Fragment>
               {listData.map((item) => (
@@ -154,6 +165,7 @@ function UploadImage() {
                   deleteItem={deleteItem}
                   listData={listData}
                   setListData={setListData}
+                  key={item.id}
                 />
               ))}
             </React.Fragment>
@@ -171,12 +183,12 @@ function UploadImage() {
             addToListData={addToListData}
           />
         )}
-        {showDeleteModal && 
+        {showDeleteModal && (
           <ModalConfirmDelete
             confirmDeleteItem={confirmDeleteItem}
             setShowDeleteModal={setShowDeleteModal}
           />
-        }
+        )}
       </div>
     </div>
   );

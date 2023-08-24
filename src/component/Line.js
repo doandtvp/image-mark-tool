@@ -1,7 +1,16 @@
 import React, { useEffect, useState } from "react";
 
-function Line({ source, target, pointSize = 7 }) {
+function Line({ source, target, titleRef }) {
   const [position, setPosition] = useState("bottom-right");
+  const [clientHeight, setClientHeigth] = useState(38)
+  const [clientWidth, setClientWidth] = useState(200)
+
+  useEffect(() => {
+    if(titleRef && titleRef.current) {
+      setClientHeigth(titleRef.current.clientHeight)
+      setClientWidth(titleRef.current.clientWidth)
+    }
+  }, [titleRef])
 
   useEffect(() => {
     if (target.x > 0 && target.y > 0) {
@@ -23,9 +32,12 @@ function Line({ source, target, pointSize = 7 }) {
 
   return (
     <div>
-    {/* top duong left duong */}
+      {/* top duong left duong */}
       {position === "bottom-right" && (
-        <svg viewBox={`0 0 ${target.x} ${target.y}`} width={`${target.x}`}>
+        <svg
+          viewBox={`0 0 ${target.x} ${target.y < 40 ? 40 : target.y}`}
+          width={`${target.x}`}
+        >
           <defs>
             <marker
               id="circle"
@@ -42,8 +54,8 @@ function Line({ source, target, pointSize = 7 }) {
             id="l1"
             x1={source.x}
             y1={source.y}
-            x2={target.x}
-            y2={target.y}
+            x2={target.y < 40 ? target.x - 10 : target.x}
+            y2={target.y < 40 ? (target.y + clientHeight) / 2 : target.y}
             stroke="#FFFFFF"
           />
         </svg>
@@ -55,7 +67,9 @@ function Line({ source, target, pointSize = 7 }) {
           style={{
             transform: `translate(0px, ${target.y}px)`,
           }}
-          viewBox={`0 ${target.y} ${target.x} ${target.y * -1}`}
+          viewBox={`0 ${target.y} ${target.x} ${
+            target.y * -1 < 40 ? 40 : target.y * -1
+          }`}
           width={`${target.x}`}
         >
           <defs>
@@ -74,8 +88,8 @@ function Line({ source, target, pointSize = 7 }) {
             id="l1"
             x1={source.x}
             y1={source.y}
-            x2={target.x}
-            y2={target.y + 37.5}
+            x2={target.y > -40 ? target.x - 10 : target.x}
+            y2={target.y > -40 ? (target.y + clientHeight) / 2 : target.y + 37.5}
             stroke="#FFFFFF"
           />
         </svg>
@@ -87,7 +101,9 @@ function Line({ source, target, pointSize = 7 }) {
           style={{
             transform: `translate(${target.x}px, 0px)`,
           }}
-          viewBox={`${target.x} 0 ${target.x * -1} ${target.y}`}
+          viewBox={`${target.x} 0 ${target.x * -1} ${
+            target.y < 40 ? 40 : target.y
+          }`}
           width={`${target.x * -1}`}
         >
           <defs>
@@ -106,8 +122,8 @@ function Line({ source, target, pointSize = 7 }) {
             id="l1"
             x1={source.x}
             y1={source.y}
-            x2={target.x}
-            y2={target.y + target.y / 2}
+            x2={target.y < 40 ? target.x + clientWidth : target.x}
+            y2={target.y < 40 ? (target.y + clientHeight) / 2 : target.y + target.y / 2}
             stroke="#FFFFFF"
           />
         </svg>
@@ -119,7 +135,9 @@ function Line({ source, target, pointSize = 7 }) {
           style={{
             transform: `translate(${target.x}px, ${target.y}px)`,
           }}
-          viewBox={`${target.x} ${target.y} ${target.x * -1} ${target.y * -1}`}
+          viewBox={`${target.x} ${target.y} ${target.x * -1} ${
+            target.y * -1 < 40 ? 40 : target.y * -1
+          }`}
           width={`${target.x * -1}`}
         >
           <defs>
@@ -138,8 +156,10 @@ function Line({ source, target, pointSize = 7 }) {
             id="l1"
             x1={source.x}
             y1={source.y}
-            x2={target.x + (target.x / 4 * -1 )}
-            y2={target.y + 37.5}
+            x2={
+              target.y > -40 ? target.x + clientWidth : target.x + (target.x / 4) * -1
+            }
+            y2={target.y > -40 ? (target.y + clientHeight) / 2 : target.y + clientHeight}
             stroke="#FFFFFF"
           />
         </svg>

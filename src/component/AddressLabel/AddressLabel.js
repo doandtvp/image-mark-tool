@@ -6,6 +6,7 @@ import Line from "../Line";
 function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
   const [showControl, setShowControl] = useState(false)
   const draggableRef = useRef(null);
+  const titleRef = useRef({})
   const { position, handleMouseDown } = useDrag({
     ref: draggableRef
   });
@@ -48,10 +49,11 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
           left: item.addressPosititon.x
         }}
         onMouseOver={()=>setShowControl(true)}
-      onMouseLeave={()=>setShowControl(false)}
+        onMouseLeave={()=>setShowControl(false)}
       >
         <h3 
           className="title"
+          ref={titleRef}
         >
           {item.title}
         </h3>
@@ -69,7 +71,7 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
       <Line
         source={{x:0, y:0}}
         target={item.addressPosititon}
-        pointSize={7}
+        titleRef={titleRef}
       />
       <div className="white-mark"></div>
     </div>

@@ -3,8 +3,7 @@
     align-items: center;
     flex-wrap: wrap;
     position: absolute;
-    max-width: 200px;
-    width: 200px;
+    width: auto;
     z-index: 20;
 }
   
@@ -42,6 +41,10 @@
     background-color: #e7e7e7; 
     color: black;
     font-weight: 500;
+}
+
+.address-label .btn-group .edit-btn {
+    min-width: 115px;
 }
 
 .address-label .btn-group button {
