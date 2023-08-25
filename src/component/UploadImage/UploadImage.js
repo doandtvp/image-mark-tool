@@ -188,6 +188,7 @@ function UploadImage() {
             addressInfro={addressInfro}
             handleChange={handleChange}
             handleCloseModal={handleCloseModal}
+            isShowModal={isShowModal}
             isEdit={isEdit}
             handleEdit={handleEdit}
             addToListData={addToListData}

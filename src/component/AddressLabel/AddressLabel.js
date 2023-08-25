@@ -38,6 +38,8 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
         position: "absolute",
         top: `${item.y}%`,
         left: `${item.x}%`,
+        width: 0,
+        height: 0
       }}
       
     >

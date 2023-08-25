@@ -1,26 +1,50 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ModalUpdateData.css";
 
 function ModalUpdateData(props) {
-
 	const {
 		x,
 		y,
 		addressInfro,
 		handleChange,
 		handleCloseModal,
+    isShowModal,
 		isEdit,
 		handleEdit,
 		addToListData
 	} = props
 
+  const [modalStyle, setModalStyle] = useState({});
+  const wrapperRef = useRef();
+
+  useEffect(() => {
+    setModalStyle({
+      top: `${y > 57 ? "unset" : y + 2 + "%"}`,
+      bottom: `${y > 57 ? (100 - y) + 2 + "%" : "unset"}`,
+      left: `${x > 78 ? "unset" : x + 1 + "%"}`,
+      right: `${x > 78 ? (100 - x) + 1 + "%" : "unset"}`,
+    });
+  }, [x, y])
+
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      if (isShowModal && isEdit && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        handleCloseModal()
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [isEdit, isShowModal])
+
   return (
     <div
       className="data-form"
-      style={{
-        top: `${y + 2}%`,
-        left: `${x + 1}%`,
-      }}
+      style={modalStyle}
+      ref={wrapperRef}
     >
       <div className="data-fields">
         <h3>Tiêu Đề</h3>

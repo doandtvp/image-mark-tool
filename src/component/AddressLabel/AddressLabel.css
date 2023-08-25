@@ -3,7 +3,7 @@
     align-items: center;
     flex-wrap: wrap;
     position: absolute;
-    width: auto;
+    width: max-content;
     z-index: 20;
 }
   
