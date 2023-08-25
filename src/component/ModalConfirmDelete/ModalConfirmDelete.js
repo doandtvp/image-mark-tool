@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import "./ModalConfirmDelete.css";
 
 function ModalConfirmDelete(props) {
-  const { confirmDeleteItem, setShowDeleteModal } = props
+  const { confirmDeleteItem, setShowDeleteModal, showDeleteModal } = props
+  const wrapperRef = useRef();
+
+  useEffect(() => {
+    const checkIfClickedOutside = e => {
+      if (showDeleteModal && wrapperRef.current && !wrapperRef.current.contains(e.target)) {
+        setShowDeleteModal(false)
+      }
+    }
+
+    document.addEventListener("mousedown", checkIfClickedOutside)
+
+    return () => {
+      document.removeEventListener("mousedown", checkIfClickedOutside)
+    }
+  }, [showDeleteModal])
 
   return (
     <div className="data-form-delete">
-      <div className='delete-modal-content'>
+      <div ref={wrapperRef} className='delete-modal-content'>
         <div className="data-fields">
           <h3>Bạn có muốn xóa địa điểm này khỏi danh sách đánh dấu?</h3>
         </div>

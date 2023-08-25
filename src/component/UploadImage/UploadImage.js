@@ -198,6 +198,7 @@ function UploadImage() {
           <ModalConfirmDelete
             confirmDeleteItem={confirmDeleteItem}
             setShowDeleteModal={setShowDeleteModal}
+            showDeleteModal={showDeleteModal}
           />
         )}
       </div>
