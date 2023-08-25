@@ -13,6 +13,7 @@ function Preview() {
   const [imgStyle, setImageStyle] = useState({});
   const [isDisplay, setIsDisplay] = useState("block");
   const listData = JSON.parse(localStorage.getItem("lists"));
+  const imageUrl = localStorage.getItem("imageUrl")
   const titleRef = useRef({})
 
   const selectAddress = (item) => {
@@ -48,7 +49,7 @@ function Preview() {
           transition: "all 1s ease-in-out",
         }}
       >
-        <img src={img} alt="abc" style={imgStyle} />
+        <img src={imageUrl || img} alt="abc" style={imgStyle} />
         {listData &&
           listData.length > 0 &&
           listData.map((item) => (

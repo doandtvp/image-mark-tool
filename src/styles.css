@@ -182,8 +182,8 @@ body {
 }
 
 .white-mark {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background: white;
   border-radius: 50%;
   margin-left: -4px;

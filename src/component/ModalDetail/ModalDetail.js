@@ -47,8 +47,6 @@ function ModalDetail({
     setIsDisplay("block");
   };
 
-  //default 50 50, top 45 left 74, transition -16 -6, scale 3
-
   return (
     <div className="modal-detail">
       <div className="modal-content">
@@ -119,11 +117,11 @@ function ModalDetail({
       )}
       
       <div
+        className="modal-mark"
         style={{
           position: "absolute",
           top: `${checkCondition ? 45 : 28}%`,
           left: `${checkCondition ? 74 : 77}%`,
-          transition: "all 1s ease-in-out",
           width: "100%",
         }}
       >

@@ -89,7 +89,7 @@ function Line({ source, target, titleRef }) {
             x1={source.x}
             y1={source.y}
             x2={target.y > -40 ? target.x - 10 : target.x}
-            y2={target.y > -40 ? (target.y + clientHeight) / 2 : target.y + 37.5}
+            y2={target.y > -40 ? (target.y + clientHeight) / 2 : target.y + clientHeight}
             stroke="#FFFFFF"
           />
         </svg>
@@ -122,8 +122,8 @@ function Line({ source, target, titleRef }) {
             id="l1"
             x1={source.x}
             y1={source.y}
-            x2={target.y < 40 ? target.x + clientWidth : target.x}
-            y2={target.y < 40 ? (target.y + clientHeight) / 2 : target.y + target.y / 2}
+            x2={(target.y < 40 && target.x * -1 > clientWidth) ? target.x + clientWidth : target.y < 40 ? target.x / 2 :  target.x}
+            y2={target.y < 40 ? (target.y + clientHeight) / 2 : target.y < 40 ? (target.y + target.y / 2) / 2 : target.y + target.y / 2}
             stroke="#FFFFFF"
           />
         </svg>

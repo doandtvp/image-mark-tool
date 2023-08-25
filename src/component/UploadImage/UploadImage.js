@@ -15,6 +15,7 @@ function UploadImage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
   const [listDots, setListDots] = useState([]);
+  const [file, setFile] = useState(localStorage.getItem("imageUrl") || '');
   const [listData, setListData] = useState(
     JSON.parse(localStorage.getItem("lists")) || [],
   );
@@ -131,6 +132,11 @@ function UploadImage() {
     });
   };
 
+  const changeHandler = (e) => {
+    setFile(URL.createObjectURL(e.target.files[0]));
+    localStorage.setItem("imageUrl", URL.createObjectURL(e.target.files[0]));
+  }
+
   return (
     <div className="upload-image">
       <div className="upload-title">
@@ -139,9 +145,13 @@ function UploadImage() {
           <button>Preview</button>
         </Link>
       </div>
+      <div className="upload-file-input">
+        <input id="actual-btn" type="file" name="file" onChange={changeHandler} hidden />
+        <label htmlFor="actual-btn">Chọn Ảnh</label>
+      </div>
       <div className="image-content">
         <div className="image-bound">
-          <img onClick={(e) => printCoordinates(e)} src={img} alt="abc" />
+          <img onClick={(e) => printCoordinates(e)} src={file || img} alt="abc" />
           {listDots &&
             listDots.length > 0 &&
             listDots.map((item, index) => (
