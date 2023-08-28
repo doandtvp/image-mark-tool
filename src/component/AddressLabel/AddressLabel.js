@@ -61,7 +61,7 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
           >
             {item.title}
           </h3>
-          {!showControl && (
+          {showControl && (
             <div className="btn-group">
               <div className="edit-btn">
                 <button onClick={() => editItem(item)}>Chỉnh Sửa</button>
