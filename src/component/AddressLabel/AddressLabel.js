@@ -53,22 +53,25 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
         onMouseOver={()=>setShowControl(true)}
         onMouseLeave={()=>setShowControl(false)}
       >
-        <h3 
+        <div
           className="title"
-          ref={titleRef}
         >
-          {item.title}
-        </h3>
-        {showControl && (
-          <div className="btn-group">
-            <div className="edit-btn">
-              <button onClick={() => editItem(item)}>Chỉnh Sửa</button>
+          <h3 
+            ref={titleRef}
+          >
+            {item.title}
+          </h3>
+          {!showControl && (
+            <div className="btn-group">
+              <div className="edit-btn">
+                <button onClick={() => editItem(item)}>Chỉnh Sửa</button>
+              </div>
+              <div className="delete-btn">
+                <button onClick={() => deleteItem(item.id, true)}>Xóa</button>
+              </div>
             </div>
-            <div className="delete-btn">
-              <button onClick={() => deleteItem(item.id, true)}>Xóa</button>
-            </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
       <Line
         source={{x:0, y:0}}

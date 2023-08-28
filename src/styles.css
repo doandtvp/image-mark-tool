@@ -134,6 +134,7 @@ body {
   letter-spacing: 7px;
   position: absolute;
   z-index: 20;
+  transform: translate(-50%, -50%);
 }
 
 .upload-title {
@@ -193,4 +194,14 @@ body {
 
 svg {
   border: 1px solid white;
+}
+
+.image-bound .line, .modal-mark .line {
+  background-color: white;
+  height: 1px;
+  position: absolute;
+}
+
+.modal-mark .line {
+  height: 2px;
 }

@@ -5,13 +5,14 @@
     position: absolute;
     width: max-content;
     z-index: 20;
+    transform: translate(-50%, -50%);
 }
   
 .address-label:hover {
     cursor: grab;
 }
 
-.address-label .title {
+.address-label .title h3 {
     width: 100%;
     margin-bottom: 5px;
     font-family: 'Silk Serif Regular';
@@ -26,7 +27,7 @@
 .address-label .btn-group {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 }
 
 .address-label .btn-group button {

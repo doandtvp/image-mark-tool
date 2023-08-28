@@ -52,14 +52,14 @@ function UploadImage() {
 
   const addToListData = () => {
     const newElement = {
-      id: listData && listData.length + 1,
+      id: Math.random(),
       x: x,
       y: y,
       title: addressInfro.title,
       description: addressInfro.description,
       addressPosititon: {
-        x: 20,
-        y: 25,
+        x: x > 96 ? -200 : 60,
+        y: y > 96 ? -200 : 60,
       },
     };
 
