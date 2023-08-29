@@ -15,12 +15,13 @@ function UploadImage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
   const [listDots, setListDots] = useState([]);
-  const [file, setFile] = useState(localStorage.getItem("imageUrl") || '');
+  const [file, setFile] = useState(localStorage.getItem("imageUrl") || "");
   const [editModalPos, setEditModalPos] = useState({
     x: 0,
-    y: 0
-  })
-  const imgRef = useRef()
+    y: 0,
+  });
+
+  const imgRef = useRef();
   const [listData, setListData] = useState(
     JSON.parse(localStorage.getItem("lists")) || [],
   );
@@ -68,8 +69,8 @@ function UploadImage() {
       },
       linePosition: {
         x: 0,
-        y: -50
-      }
+        y: -50,
+      },
     };
 
     setListData([...listData, newElement]);
@@ -82,6 +83,17 @@ function UploadImage() {
   };
 
   const getEditItem = (item) => {
+    const spaceTop =
+      (imgRef.current.clientHeight / 100) * item.y +
+      2 +
+      item.addressPosititon.y;
+    const spaceLeft =
+      (imgRef.current.clientWidth / 100) * item.x + 1 + item.addressPosititon.x;
+    setEditModalPos({
+      x: Math.round(spaceLeft),
+      y: Math.round(spaceTop),
+    });
+
     setIsShowModal(true);
     setIsEdit(true);
     setListDots([]);
@@ -144,7 +156,7 @@ function UploadImage() {
   const changeHandler = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
     localStorage.setItem("imageUrl", URL.createObjectURL(e.target.files[0]));
-  }
+  };
 
   return (
     <div className="upload-image">
@@ -155,12 +167,23 @@ function UploadImage() {
         </Link>
       </div>
       <div className="upload-file-input">
-        <input id="actual-btn" type="file" name="file" onChange={changeHandler} hidden />
+        <input
+          id="actual-btn"
+          type="file"
+          name="file"
+          onChange={changeHandler}
+          hidden
+        />
         <label htmlFor="actual-btn">Chọn Ảnh</label>
       </div>
       <div className="image-content">
         <div className="image-bound">
-          <img ref={imgRef} onClick={(e) => printCoordinates(e)} src={file || img} alt="abc" />
+          <img
+            ref={imgRef}
+            onClick={(e) => printCoordinates(e)}
+            src={file || img}
+            alt="abc"
+          />
           {listDots &&
             listDots.length > 0 &&
             listDots.map((item, index) => (
@@ -200,6 +223,8 @@ function UploadImage() {
           isEdit={isEdit}
           handleEdit={handleEdit}
           addToListData={addToListData}
+          editModalPos={editModalPos}
+          imgRef={imgRef}
         />
         <ModalConfirmDelete
           confirmDeleteItem={confirmDeleteItem}

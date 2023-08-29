@@ -18,7 +18,6 @@ function ModalDetail({
 }) {
   const currentIndex = listData.findIndex((x) => x.id === currentAddress.id);
   const checkCondition = currentAddress.x > 20 && currentAddress.x < 80 && currentAddress.y > 20 && currentAddress.y < 80
-  const titleRef = useRef({})
   const [addressTransform, setAddressTransform] = useState({
     x: 0,
     y: -50
