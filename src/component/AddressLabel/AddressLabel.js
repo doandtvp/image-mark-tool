@@ -5,8 +5,11 @@ import Line from "../Line";
 
 function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
   const [showControl, setShowControl] = useState(false)
+  const [addressTransform, setAddressTransform] = useState({
+    x: 0,
+    y: -50
+  })
   const draggableRef = useRef(null);
-  const titleRef = useRef({})
   const { position, handleMouseDown } = useDrag({
     ref: draggableRef
   });
@@ -18,6 +21,10 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
           location.addressPosititon = {
             x: position.x,
             y: position.y
+          }
+          location.linePosition = {
+            x: addressTransform.x,
+            y: addressTransform.y
           }
         }
         return location
@@ -41,14 +48,14 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
         width: 0,
         height: 0
       }}
-      
     >
       <div className="address-label"
         ref={draggableRef}
         onMouseDown={(e) => handleDrag(e)}
         style={{
           top: item.addressPosititon.y,
-          left: item.addressPosititon.x
+          left: item.addressPosititon.x,
+          transform: `translate(${addressTransform.x}%, ${addressTransform.y}%)`
         }}
         onMouseOver={()=>setShowControl(true)}
         onMouseLeave={()=>setShowControl(false)}
@@ -56,9 +63,7 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
         <div
           className="title"
         >
-          <h3 
-            ref={titleRef}
-          >
+          <h3>
             {item.title}
           </h3>
           {showControl && (
@@ -76,7 +81,7 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
       <Line
         source={{x:0, y:0}}
         target={item.addressPosititon}
-        titleRef={titleRef}
+        setAddressTransform={setAddressTransform}
       />
       <div className="white-mark"></div>
     </div>

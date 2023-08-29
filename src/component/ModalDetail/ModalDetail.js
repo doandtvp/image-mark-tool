@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import iconClose from "../../access/icons/icon-close.svg";
 import bottle from "../../access/img/botte.jpg";
 import arrow from "../../access/icons/icon-arrow.png";
@@ -19,6 +19,10 @@ function ModalDetail({
   const currentIndex = listData.findIndex((x) => x.id === currentAddress.id);
   const checkCondition = currentAddress.x > 20 && currentAddress.x < 80 && currentAddress.y > 20 && currentAddress.y < 80
   const titleRef = useRef({})
+  const [addressTransform, setAddressTransform] = useState({
+    x: 0,
+    y: -50
+  })
 
   useEffect(() => {
     selectAddress(currentAddress);
@@ -130,15 +134,15 @@ function ModalDetail({
           <Line
             source={{ x: 0, y: 0 }}
             target={currentAddress.addressPosititon}
-            titleRef={titleRef}
+            setAddressTransform={setAddressTransform}
           />
           <h3
             className="preview-title"
-            ref={titleRef}
             style={{
               cursor: "pointer",
               top: currentAddress.addressPosititon.y,
               left: currentAddress.addressPosititon.x,
+              transform: `translate(${addressTransform.x}%, ${addressTransform.y}%)`
             }}
           >
             {currentAddress.title}

@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Line({ source, target, titleRef }) {
-  const [position, setPosition] = useState("bottom-right");
-  const [clientHeight, setClientHeigth] = useState(0);
-  const [clientWidth, setClientWidth] = useState(0);
+function Line({ source, target, setAddressTransform }) {
   const [angle, setAngle] = useState(0);
   const [distance, setDistance] = useState(0);
   const [style, setStyle] = useState({
@@ -12,27 +9,62 @@ function Line({ source, target, titleRef }) {
   });
 
   useEffect(() => {
-    if (titleRef && titleRef.current) {
-      setClientHeigth(titleRef.current.clientHeight);
-      setClientWidth(titleRef.current.clientWidth);
-    }
-  }, [titleRef]);
-
-  useEffect(() => {
-    if (target.x > 0 && target.y > 0) {
-      setPosition("bottom-right");
-    }
-
-    if (target.x > 0 && target.y < 0) {
-      setPosition("top-right");
-    }
-
-    if (target.x < 0 && target.y > 0) {
-      setPosition("bottom-left");
-    }
-
-    if (target.x < 0 && target.y < 0) {
-      setPosition("top-left");
+    if (setAddressTransform) {
+      if (target.x > 0 && target.y > 0) {
+        if (target.x < 80) {
+          setAddressTransform({
+            x: -50,
+            y: 0,
+          });
+        } else {
+          setAddressTransform({
+            x: 0,
+            y: -50,
+          });
+        }
+      }
+  
+      if (target.x > 0 && target.y < 0) {
+        if (target.x > 80) {
+          setAddressTransform({
+            x: 0,
+            y: -50,
+          });
+        } else {
+          setAddressTransform({
+            x: -50,
+            y: -100,
+          });
+        }
+      }
+  
+      if (target.x < 0 && target.y > 0) {
+        if (target.y > 80) {
+          setAddressTransform({
+            x: -50,
+            y: 0,
+          });
+        } else {
+          setAddressTransform({
+            x: -100,
+            y: -50,
+          });
+        }
+      }
+  
+      if (target.x < 0 && target.y < 0) {
+        if (target.y < -80) {
+          setAddressTransform({
+            x: -50,
+            y: -100,
+          });
+        } else {
+          setAddressTransform({
+            x: -100,
+            y: -50,
+          });
+        }
+      }
     }
   }, [target]);
 
@@ -60,17 +92,10 @@ function Line({ source, target, titleRef }) {
     <div
       className="line"
       style={{
-        width:
-          target.y < 40 && target.y > -40
-            ? distance - clientWidth / 2
-            : distance - (distance / 100) * 10,
+        width: distance,
         transform: `rotate(${angle}deg)`,
-        top: `${style.top - (style.top / 100) * 10}px`,
-        left: `${
-          target.y < 40 && target.y > -40 && target.x < 0
-            ? (distance - clientWidth / 2) * -1
-            : style.left - (style.left / 100) * 10
-        }px`,
+        top: `${style.top}px`,
+        left: `${style.left}px`,
       }}
     ></div>
   );

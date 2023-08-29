@@ -78,7 +78,8 @@ function Preview() {
                     style={{ 
                       cursor: "pointer", 
                       top: item.addressPosititon.y,
-                      left: item.addressPosititon.x
+                      left: item.addressPosititon.x,
+                      transform: `translate(${item.linePosition.x}%, ${item.linePosition.y}%)`
                     }}
                   >
                     {item.title}

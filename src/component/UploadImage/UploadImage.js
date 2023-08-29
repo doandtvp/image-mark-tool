@@ -61,6 +61,10 @@ function UploadImage() {
         x: x > 96 ? -200 : 60,
         y: y > 96 ? -200 : 60,
       },
+      linePosition: {
+        x: 0,
+        y: -50
+      }
     };
 
     setListData([...listData, newElement]);
