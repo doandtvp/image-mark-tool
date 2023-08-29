@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import img from "../../access/img/map-center-overflow.jpg";
 import ModalUpdateData from "../ModalUpdateData/ModalUpdateData";
 import AddressLabel from "../AddressLabel/AddressLabel";
@@ -16,6 +16,11 @@ function UploadImage() {
   const [currentItem, setCurrentItem] = useState({});
   const [listDots, setListDots] = useState([]);
   const [file, setFile] = useState(localStorage.getItem("imageUrl") || '');
+  const [editModalPos, setEditModalPos] = useState({
+    x: 0,
+    y: 0
+  })
+  const imgRef = useRef()
   const [listData, setListData] = useState(
     JSON.parse(localStorage.getItem("lists")) || [],
   );
@@ -155,7 +160,7 @@ function UploadImage() {
       </div>
       <div className="image-content">
         <div className="image-bound">
-          <img onClick={(e) => printCoordinates(e)} src={file || img} alt="abc" />
+          <img ref={imgRef} onClick={(e) => printCoordinates(e)} src={file || img} alt="abc" />
           {listDots &&
             listDots.length > 0 &&
             listDots.map((item, index) => (
@@ -185,26 +190,22 @@ function UploadImage() {
             </React.Fragment>
           )}
         </div>
-        {isShowModal && (
-          <ModalUpdateData
-            x={x}
-            y={y}
-            addressInfro={addressInfro}
-            handleChange={handleChange}
-            handleCloseModal={handleCloseModal}
-            isShowModal={isShowModal}
-            isEdit={isEdit}
-            handleEdit={handleEdit}
-            addToListData={addToListData}
-          />
-        )}
-        {showDeleteModal && (
-          <ModalConfirmDelete
-            confirmDeleteItem={confirmDeleteItem}
-            setShowDeleteModal={setShowDeleteModal}
-            showDeleteModal={showDeleteModal}
-          />
-        )}
+        <ModalUpdateData
+          x={x}
+          y={y}
+          addressInfro={addressInfro}
+          handleChange={handleChange}
+          handleCloseModal={handleCloseModal}
+          isShowModal={isShowModal}
+          isEdit={isEdit}
+          handleEdit={handleEdit}
+          addToListData={addToListData}
+        />
+        <ModalConfirmDelete
+          confirmDeleteItem={confirmDeleteItem}
+          setShowDeleteModal={setShowDeleteModal}
+          showDeleteModal={showDeleteModal}
+        />
       </div>
     </div>
   );

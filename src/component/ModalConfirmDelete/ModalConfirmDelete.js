@@ -20,7 +20,7 @@ function ModalConfirmDelete(props) {
   }, [showDeleteModal])
 
   return (
-    <div className="data-form-delete">
+    <div className={`data-form-delete ${showDeleteModal ? 'show-modal-deleted' : 'hide-modal-deleted'}`}>
       <div ref={wrapperRef} className='delete-modal-content'>
         <div className="data-fields">
           <h3>Bạn có muốn xóa địa điểm này khỏi danh sách đánh dấu?</h3>

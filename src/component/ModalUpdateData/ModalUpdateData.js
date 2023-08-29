@@ -9,7 +9,7 @@ function ModalUpdateData(props) {
 		handleChange,
 		handleCloseModal,
     isShowModal,
-		isEdit,
+    isEdit,
 		handleEdit,
 		addToListData
 	} = props
@@ -23,6 +23,7 @@ function ModalUpdateData(props) {
       bottom: `${y > 57 ? (100 - y) + 2 + "%" : "unset"}`,
       left: `${x > 78 ? "unset" : x + 1 + "%"}`,
       right: `${x > 78 ? (100 - x) + 1 + "%" : "unset"}`,
+      transition: 'all 0.5s ease'
     });
   }, [x, y])
 
@@ -42,7 +43,7 @@ function ModalUpdateData(props) {
 
   return (
     <div
-      className="data-form"
+      className={`data-form ${isShowModal ? 'show-form' : 'hide-form'}`}
       style={modalStyle}
       ref={wrapperRef}
     >
