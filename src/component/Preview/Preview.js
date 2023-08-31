@@ -1,20 +1,19 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import img from "../../access/img/map-center-overflow.jpg";
 import ModalDetail from "../ModalDetail/ModalDetail";
-import { Link } from "react-router-dom";
 import './Preview.css'
 import Line from "../Line";
 import MobileList from "../MobileList/MobileList";
+import { MyContext } from "../../ContextProvider";
 
-function Preview() {
+function Preview({ setToggleTab }) {
   const [isShowModal, setIsShowModal] = useState(false);
   const [currentAddress, setCurrentAddress] = useState({});
   const [zoom, setZoom] = useState(1);
   const [imgStyle, setImageStyle] = useState({});
   const [isDisplay, setIsDisplay] = useState("block");
-  const listData = JSON.parse(localStorage.getItem("lists"));
-  const imageUrl = localStorage.getItem("imageUrl")
   const titleRef = useRef({})
+  const { listDataMap, file } = useContext(MyContext);
 
   const selectAddress = (item) => {
     setCurrentAddress(item);
@@ -37,10 +36,8 @@ function Preview() {
   return (
     <div className="preview-image">
       <div className="upload-title">
-        <h1>Preview Image</h1>
-        <Link to="/">
-          <button>Editor</button>
-        </Link>
+        <button onClick={() => setToggleTab(true)}>Chỉnh Sửa</button>
+        <button>Đóng</button>
       </div>
       <div
         className="image-bound"
@@ -49,10 +46,10 @@ function Preview() {
           transition: "all 1s ease-in-out",
         }}
       >
-        <img src={imageUrl || img} alt="abc" style={imgStyle} />
-        {listData &&
-          listData.length > 0 &&
-          listData.map((item) => (
+        <img src={file || img} alt="abc" style={imgStyle} />
+        {listDataMap &&
+          listDataMap.length > 0 &&
+          listDataMap.map((item) => (
             <div className="preview-wraper" key={item.id}>
               <div
                 style={{
@@ -93,7 +90,7 @@ function Preview() {
         <ModalDetail
           currentAddress={currentAddress}
           setCurrentAddress={setCurrentAddress}
-          listData={listData}
+          listData={listDataMap}
           setIsShowModal={setIsShowModal}
           zoom={zoom}
           setZoom={setZoom}
@@ -103,7 +100,7 @@ function Preview() {
         />
       )}
       <MobileList
-        listData={listData}
+        listData={listDataMap}
       />
     </div>
   );

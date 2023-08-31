@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import iconClose from "../../access/icons/icon-close.svg";
 import bottle from "../../access/img/botte.jpg";
 import arrow from "../../access/icons/icon-arrow.png";

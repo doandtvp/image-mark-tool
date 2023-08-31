@@ -1,10 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { useDrag } from "../../common/useDrag";
 import "./AddressLabel.css";
 import Line from "../Line";
+import { MyContext } from "../../ContextProvider";
 
-function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
+function AddressLabel({ item, editItem, deleteItem }) {
   const [showControl, setShowControl] = useState(false);
+  const { listDataMap, setListDataMap } = useContext(MyContext);
   const [addressTransform, setAddressTransform] = useState({
     x: 0,
     y: -50,
@@ -16,7 +18,7 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
 
   useEffect(() => {
     if (position.x && position.y) {
-      const newList = listData.map((location) => {
+      const newList = listDataMap.map((location) => {
         if (location.id === item.id) {
           location.addressPosititon = {
             x: position.x,
@@ -30,8 +32,7 @@ function AddressLabel({ item, editItem, deleteItem, listData, setListData }) {
         return location;
       });
 
-      setListData(newList);
-      localStorage.setItem("lists", JSON.stringify(newList));
+      setListDataMap(newList);
     }
   }, [position]);
 

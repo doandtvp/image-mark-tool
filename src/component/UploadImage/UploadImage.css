@@ -22,17 +22,26 @@
     font-family: 'Silk Serif Regular';
 }
 
-.upload-file-input {
-    padding: 20px 10px;
-    margin-bottom: 10px;
-}
 
-.upload-file-input label {
-    background-color: gray;
+.upload-file-input label, .upload-file-input .save-all-button {
+    background-color: #2e74df;
     color: white;
     padding: 0.5rem;
     font-family: sans-serif;
     border-radius: 0.3rem;
     cursor: pointer;
     margin-top: 1rem;
+    min-width: 99px;
+    font-size: 16px;
+    text-transform: capitalize;
+}
+
+.upload-file-input .save-all-button {
+    outline: none;
+    border: none;
+    margin: 0 10px;
+}
+
+.upload-file-input .can-save {
+    background-color: #2e74df;
 }

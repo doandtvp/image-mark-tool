@@ -1,19 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react'
 import UploadImage from './component/UploadImage/UploadImage'
 import Preview from './component/Preview/Preview'
-import { Route, Routes, BrowserRouter } from 'react-router-dom'
+import { MyContext } from './ContextProvider'
 
 function App() {
+  const [toggleTabs, setToggleTab] = useState(true)
+  const [listDataMap, setListDataMap] = useState(
+    JSON.parse(localStorage.getItem("lists")) || [],
+  )
+  const [file, setFile] = useState("");
   return (
-    <div className='container'>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<UploadImage/>} />
-          <Route path="/preview" element={<Preview/>} />
-          <Route path="*" element={<p>Sorry, nothing here</p>} />
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <MyContext.Provider value={{ listDataMap,setListDataMap, file, setFile  }}>
+      <div className='container'>
+        {toggleTabs ? <UploadImage setToggleTab={setToggleTab}/> : <Preview setToggleTab={setToggleTab}/>}
+      </div>
+    </MyContext.Provider>
   )
 }
 

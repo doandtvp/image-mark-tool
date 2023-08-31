@@ -1,12 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import img from "../../access/img/map-center-overflow.jpg";
 import ModalUpdateData from "../ModalUpdateData/ModalUpdateData";
 import AddressLabel from "../AddressLabel/AddressLabel";
-import { Link } from "react-router-dom";
 import "./UploadImage.css";
 import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
+import { MyContext } from "../../ContextProvider";
 
-function UploadImage() {
+function UploadImage({ setToggleTab }) {
   const [x, setX] = useState(-1);
   const [y, setY] = useState(-1);
   const [currentId, setCurrentId] = useState(0);
@@ -15,16 +15,12 @@ function UploadImage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
   const [listDots, setListDots] = useState([]);
-  const [file, setFile] = useState(localStorage.getItem("imageUrl") || "");
+  const { listDataMap,setListDataMap, file, setFile } = useContext(MyContext);
   const [editModalPos, setEditModalPos] = useState({
     x: 0,
     y: 0,
   });
-
   const imgRef = useRef();
-  const [listData, setListData] = useState(
-    JSON.parse(localStorage.getItem("lists")) || [],
-  );
   const [addressInfro, setAddressInfo] = useState({
     title: "",
     description: "",
@@ -68,13 +64,12 @@ function UploadImage() {
         y: y > 96 ? -200 : 60,
       },
       linePosition: {
-        x: 0,
-        y: -50,
+        x: -50,
+        y: 0,
       },
     };
 
-    setListData([...listData, newElement]);
-    localStorage.setItem("lists", JSON.stringify([...listData, newElement]));
+    setListDataMap([...listDataMap, newElement]);
     setAddressInfo({
       title: "",
       description: "",
@@ -107,7 +102,7 @@ function UploadImage() {
   };
 
   const handleEdit = () => {
-    const newList = listData.map((item) =>
+    const newList = listDataMap.map((item) =>
       currentItem.id === item.id
         ? {
             ...item,
@@ -120,8 +115,7 @@ function UploadImage() {
       title: "",
       description: "",
     });
-    setListData(newList);
-    localStorage.setItem("lists", JSON.stringify(newList));
+    setListDataMap(newList);
     setIsEdit(false);
     setIsShowModal(false);
   };
@@ -132,9 +126,8 @@ function UploadImage() {
   };
 
   const confirmDeleteItem = () => {
-    const newArr = listData.filter((item) => item.id !== currentId);
-    setListData(newArr);
-    localStorage.setItem("lists", JSON.stringify(newArr));
+    const newArr = listDataMap.filter((item) => item.id !== currentId);
+    setListDataMap(newArr);
     setX(-1);
     setY(-1);
     setShowDeleteModal(false);
@@ -155,27 +148,31 @@ function UploadImage() {
 
   const changeHandler = (e) => {
     setFile(URL.createObjectURL(e.target.files[0]));
-    localStorage.setItem("imageUrl", URL.createObjectURL(e.target.files[0]));
   };
+
+  const handleSaveLocal = () => {
+    localStorage.setItem("lists", JSON.stringify(listDataMap));
+  }
 
   return (
     <div className="upload-image">
       <div className="upload-title">
-        <h1>Upload Image</h1>
-        <Link to="/preview">
-          <button>Preview</button>
-        </Link>
+        {/* <h1>Tải ảnh lên</h1> */}
+        <div className="upload-file-input">
+          <input
+            id="actual-btn"
+            type="file"
+            name="file"
+            onChange={changeHandler}
+            hidden
+          />
+          <label htmlFor="actual-btn">Chọn Ảnh</label>
+          <button className="save-all-button can-save" onClick={handleSaveLocal}>Lưu lại</button>
+          <button onClick={() => setToggleTab(false)}>Xem Trước</button>
+        </div>
+        <button>Đóng</button>
       </div>
-      <div className="upload-file-input">
-        <input
-          id="actual-btn"
-          type="file"
-          name="file"
-          onChange={changeHandler}
-          hidden
-        />
-        <label htmlFor="actual-btn">Chọn Ảnh</label>
-      </div>
+      
       <div className="image-content">
         <div className="image-bound">
           <img
@@ -198,15 +195,13 @@ function UploadImage() {
                 <div className="white-mark"></div>
               </div>
             ))}
-          {listData && listData.length > 0 && (
+          {listDataMap && listDataMap.length > 0 && (
             <React.Fragment>
-              {listData.map((item) => (
+              {listDataMap.map((item) => (
                 <AddressLabel
                   item={item}
                   editItem={getEditItem}
                   deleteItem={deleteItem}
-                  listData={listData}
-                  setListData={setListData}
                   key={item.id}
                 />
               ))}
