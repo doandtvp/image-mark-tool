@@ -156,7 +156,7 @@ function UploadImage({ setToggleTab }) {
 
   return (
     <div className="upload-image">
-      <div className="upload-title">
+      <div className="upload-title upload-title-edit">
         {/* <h1>Tải ảnh lên</h1> */}
         <div className="upload-file-input">
           <input
