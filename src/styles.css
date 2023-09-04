@@ -28,6 +28,15 @@ body {
   margin: 0;
 }
 
+#root {
+  position: absolute;
+  top:0;
+  left:0;
+  height:100%;
+  width: 100%;
+  z-index: 100;
+}
+
 #root .container {
   overflow: hidden;
 }
@@ -143,6 +152,7 @@ body {
   justify-content: space-between;
   padding: 30px 16px;
   font-family: 'Silk Serif Regular';
+  background-color: white;
 }
 
 .upload-title button {

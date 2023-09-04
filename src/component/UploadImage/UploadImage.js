@@ -15,7 +15,7 @@ function UploadImage({ setToggleTab }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
   const [listDots, setListDots] = useState([]);
-  const { listDataMap,setListDataMap, file, setFile } = useContext(MyContext);
+  const { listDataMap,setListDataMap, file, setFile, defaultProps } = useContext(MyContext);
   const [editModalPos, setEditModalPos] = useState({
     x: 0,
     y: 0,
@@ -151,7 +151,13 @@ function UploadImage({ setToggleTab }) {
   };
 
   const handleSaveLocal = () => {
-    localStorage.setItem("lists", JSON.stringify(listDataMap));
+    // localStorage.setItem("lists", JSON.stringify(listDataMap));
+    defaultProps.getListAddressMark(listDataMap)
+  }
+
+  const handleCloseApp = () => {
+    const rootDiv = document.getElementById('root');
+    rootDiv.remove()
   }
 
   return (
@@ -167,10 +173,10 @@ function UploadImage({ setToggleTab }) {
             hidden
           />
           <label htmlFor="actual-btn">Chọn Ảnh</label>
+          <button className="preview-btn" onClick={() => setToggleTab(false)}>Xem Trước</button>
           <button className="save-all-button can-save" onClick={handleSaveLocal}>Lưu lại</button>
-          <button onClick={() => setToggleTab(false)}>Xem Trước</button>
         </div>
-        <button>Đóng</button>
+        <button onClick={handleCloseApp}>Đóng</button>
       </div>
       
       <div className="image-content">
@@ -179,7 +185,7 @@ function UploadImage({ setToggleTab }) {
             ref={imgRef}
             onClick={(e) => printCoordinates(e)}
             src={file || img}
-            alt="abc"
+            alt="input-img"
           />
           {listDots &&
             listDots.length > 0 &&

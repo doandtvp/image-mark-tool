@@ -33,11 +33,16 @@ function Preview({ setToggleTab }) {
     });
   };
 
+  const handleCloseApp = () => {
+    const rootDiv = document.getElementById('root');
+    rootDiv.remove()
+  }
+
   return (
     <div className="preview-image">
       <div className="upload-title">
         <button onClick={() => setToggleTab(true)}>Chỉnh Sửa</button>
-        <button>Đóng</button>
+        <button onClick={handleCloseApp}>Đóng</button>
       </div>
       <div
         className="image-bound"

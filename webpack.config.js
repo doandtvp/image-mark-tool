@@ -16,7 +16,6 @@ module.exports = function (env) {
                 return obj
             }, {})
             result[`bundles.min`] = glob.sync(`./build/static/js/**.js`).map(f => path.resolve(__dirname, f))
-            console.log(result)
             return result;
         })(),
         output: {
