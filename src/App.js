@@ -5,7 +5,7 @@ import { MyContext } from './ContextProvider'
 
 function App({ defaultProps }) {
   const imgurl = defaultProps.element ? defaultProps.element.src : ''
-  const listMark = defaultProps.element.dataset.lists ? JSON.parse(defaultProps.element.dataset.lists) : []
+  const listMark = defaultProps.element.hasAttribute('lists') ? JSON.parse(defaultProps.element.getAttribute('lists')) : []
   const [toggleTabs, setToggleTab] = useState(true)
   const [listDataMap, setListDataMap] = useState(listMark)
   const [file, setFile] = useState(imgurl);

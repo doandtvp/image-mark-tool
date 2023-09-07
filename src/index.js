@@ -10,7 +10,7 @@ let highestZindex = 0
 let defaultProps = {
   element: null,
   getListAddressMark: (arr) => {
-    defaultProps.element.dataset.lists = JSON.stringify(arr)
+    defaultProps.element.setAttribute('lists', JSON.stringify(arr))
   },
 };
 

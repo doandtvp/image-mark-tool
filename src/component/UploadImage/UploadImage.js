@@ -151,7 +151,6 @@ function UploadImage({ setToggleTab }) {
   };
 
   const handleSaveLocal = () => {
-    // localStorage.setItem("lists", JSON.stringify(listDataMap));
     defaultProps.getListAddressMark(listDataMap)
   }
 

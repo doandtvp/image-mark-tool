@@ -22,8 +22,8 @@ function ModalUpdateData(props) {
   useEffect(() => {
     if (!isEdit) {
       setModalStyle({
-        top: `${y > 57 ? "unset" : y + 2 + "%"}`,
-        bottom: `${y > 57 ? 100 - y + 2 + "%" : "unset"}`,
+        top: `${y > 56 ? "unset" : y + 2 + "%"}`,
+        bottom: `${y > 56 ? 100 - y + 2 + "%" : "unset"}`,
         left: `${x > 78 ? "unset" : x + 1 + "%"}`,
         right: `${x > 78 ? 100 - x + 1 + "%" : "unset"}`,
         transition: "all 0.5s ease",
