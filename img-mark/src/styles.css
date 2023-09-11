@@ -74,10 +74,10 @@ body {
   font-family: "Silk Serif Regular";
   background-color: white;
   position: fixed;
-  top: 0%;
   width: 100%;
   z-index: 200;
   box-sizing: border-box;
+  bottom: 0%;
 }
 
 .upload-title button {
@@ -99,7 +99,7 @@ body {
 
 .image-content {
   position: relative;
-  margin-top: 94px;
+  margin-bottom: 90px;
 }
 
 .image-bound {
