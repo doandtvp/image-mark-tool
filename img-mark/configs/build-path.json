@@ -1,0 +1,6 @@
+{
+    "development": "//localhost:3007/dist",
+    "beta": "//ims.mediacdn.vn/ims-embed/image-mark/beta",
+    "closebeta": "//ims.mediacdn.vn/ims-embed/image-mark/closebeta",
+    "production": "//ims.mediacdn.vn/ims-embed/image-mark/production"
+}

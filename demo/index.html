@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <button id="preview-button">Preview</button>
+    <br />
+    <div
+      id="img-bound"
+      style="position: relative; width: 50%; z-index: 200; display: flex"
+    >
+      <img
+        id="test"
+        src="https://toquoc.mediacdn.vn/Uploaded/myda/2017_07_17/nhungbaibientrentg/100_WCQJ.jpg"
+        alt="abc"
+        style="width: 33%; padding: 10px"
+        lists='[{"id":0.952570103958678,"x":42,"y":31,"title":"aaaaa","description":"aaaaaaaaaa","addressPosititon":{"x":60,"y":60},"linePosition":{"x":-50,"y":0}}]'
+      />
+
+      <!-- <img
+        id="test1"
+        src="https://png.pngtree.com/thumb_back/fw800/background/20210910/pngtree-beach-evening-sea-beach-play-photography-map-with-pictures-image_845007.jpg"
+        alt="abc"
+        style="width: 33%; padding: 10px"
+        lists='[{"id":0.09033983113548816,"x":46,"y":17,"title":"bbbb","description":"bbbbbbbbbbb","addressPosititon":{"x":60,"y":60},"linePosition":{"x":-50,"y":0}}]'
+      />
+      <img
+        id="test2"
+        src="https://img.meta.com.vn/Data/image/2021/04/26/hinh-anh-bien-dep-14.jpg"
+        alt="abc"
+        style="width: 33%; padding: 10px"
+        lists='[{"id":0.6120463155028049,"x":39,"y":42,"title":"cccc","description":"cccccccccc","addressPosititon":{"x":60,"y":60},"linePosition":{"x":-50,"y":0}}]'
+      /> -->
+    </div>
+
+    <script src="http://127.0.0.1:5500/dist/1.0.0/bundle.js"></script>
+    <script>
+      const imgWrapper = document.getElementById("img-bound");
+      const rootBtn = document.getElementById("test");
+      const rootBtn1 = document.getElementById("test1");
+      const rootBtn2 = document.getElementById("test2");
+      const previewButton = document.getElementById("preview-button");
+
+      const markImg = (arr, rootImg) => {
+        rootImg.setAttribute("lists", JSON.stringify(arr));
+      };
+
+      rootBtn.addEventListener("click", () => {
+        window.ImageMarkTool.init({
+          element: rootBtn,
+          getListAddressMark: (arr) => {
+            markImg(arr, rootBtn);
+          },
+        });
+      });
+
+      // rootBtn1.addEventListener("click", () => {
+      //   window.ImageMarkTool.init({
+      //     element: rootBtn1,
+      //     getListAddressMark: (arr) => {
+      //       markImg(arr, rootBtn1);
+      //     },
+      //   });
+      // });
+
+      // rootBtn2.addEventListener("click", () => {
+      //   window.ImageMarkTool.init({
+      //     element: rootBtn2,
+      //     getListAddressMark: (arr) => {
+      //       markImg(arr, rootBtn2);
+      //     },
+      //   });
+      // });
+
+      previewButton.addEventListener("click", () => {
+        window.ImageMarkTool.preview({
+          element: rootBtn,
+          boundElement: imgWrapper,
+        });
+      });
+    </script>
+  </body>
+</html>

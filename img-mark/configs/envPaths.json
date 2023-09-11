@@ -1,0 +1,6 @@
+{
+    "development": "./.env",
+    "beta": "./.env.beta",
+    "closebeta": "./.env.closebeta",
+    "production": "./.env.production"
+}
