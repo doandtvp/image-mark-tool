@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import UploadImage from "./component/UploadImage/UploadImage";
 import Preview from "./component/Preview/Preview";
 import { MyContext } from "./ContextProvider";
+import { getAspectRatio } from "./common/getAspectRatio";
 
 function App({ defaultProps, unMountApp }) {
   const imgurl = defaultProps.element ? defaultProps.element.src : "";
+  const imgRatio = getAspectRatio(defaultProps.element);
   const listMark = defaultProps.element.hasAttribute("lists")
     ? JSON.parse(defaultProps.element.getAttribute("lists"))
     : [];
@@ -21,6 +23,7 @@ function App({ defaultProps, unMountApp }) {
         setFile,
         defaultProps,
         unMountApp,
+        imgRatio,
       }}
     >
       <div className="widget-image-overlay"></div>

@@ -36,6 +36,7 @@
 .data-fields .input-labels {
   margin-bottom: 5px;
   font-weight: 500;
+  margin-top: 0;
 }
 
 .data-fields .address-input {

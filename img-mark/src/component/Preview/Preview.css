@@ -1,10 +1,9 @@
 .preview-image {
   width: 100%;
   position: relative;
+  padding-bottom: 90px;
 }
-
 .preview-image .image-show {
   width: 100%;
   height: 100%;
-  margin-bottom: 90px;
 }

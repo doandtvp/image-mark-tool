@@ -19,18 +19,12 @@ function ModalUpdateData(props) {
 
   const [modalStyle, setModalStyle] = useState({});
   const wrapperRef = useRef();
-  const rect = wrapperRef.current?.getBoundingClientRect() || {};
-
-  useLayoutEffect(() => {
-    const { visibleWidth, visibleHeight, top, left } =
-      getVisibleDimensions(rect);
-  }, [rect]);
 
   useEffect(() => {
     if (!isEdit) {
       setModalStyle({
-        top: `${y > 32 ? "unset" : y + 2 + "%"}`,
-        bottom: `${y > 32 ? 100 - y + 2 + "%" : "unset"}`,
+        top: `${y > 40 ? "unset" : y + 2 + "%"}`,
+        bottom: `${y > 40 ? 100 - y + 2 + "%" : "unset"}`,
         left: `${x > 75 ? "unset" : x + 1 + "%"}`,
         right: `${x > 75 ? 100 - x + 1 + "%" : "unset"}`,
         transition: "all 0.5s ease",

@@ -14,7 +14,7 @@ function ModalDetail({
   setImageStyle,
   selectAddress,
   setIsDisplay,
-  setShowToolBar,
+  imgRatio,
 }) {
   const currentIndex = listData.findIndex((x) => x.id === currentAddress.id);
   const checkCondition =
@@ -129,7 +129,7 @@ function ModalDetail({
         className="modal-mark"
         style={{
           position: "absolute",
-          top: `${checkCondition ? 45 : 28}%`,
+          top: `${checkCondition ? 40 : 28}%`,
           left: `${checkCondition ? 74 : 77}%`,
           width: "100%",
         }}

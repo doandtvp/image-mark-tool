@@ -15,12 +15,12 @@ function Preview({
   const [isShowModal, setIsShowModal] = useState(false);
   const [currentAddress, setCurrentAddress] = useState({});
   const [zoom, setZoom] = useState(1);
-  const [imgStyle, setImageStyle] = useState({});
   const [isDisplay, setIsDisplay] = useState("block");
   const titleRef = useRef({});
-  const { listDataMap, file, unMountApp } = useContext(MyContext);
+  const { listDataMap, file, unMountApp, imgRatio } = useContext(MyContext);
   const [listDataAddress, setLisDataAddress] = useState([]);
   const [isShow, setIsShow] = useState(true);
+  const [imgStyle, setImageStyle] = useState({});
 
   useEffect(() => {
     if (listDataProps) {
@@ -139,6 +139,7 @@ function Preview({
               setImageStyle={setImageStyle}
               selectAddress={selectAddress}
               setIsDisplay={setIsDisplay}
+              imgRatio={imgRatio}
             />
           )}
           <MobileList listData={listDataAddress} />

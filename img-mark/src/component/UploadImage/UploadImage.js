@@ -14,8 +14,14 @@ function UploadImage({ setToggleTab }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
   const [listDots, setListDots] = useState([]);
-  const { listDataMap, setListDataMap, file, unMountApp, defaultProps } =
-    useContext(MyContext);
+  const {
+    listDataMap,
+    setListDataMap,
+    file,
+    unMountApp,
+    defaultProps,
+    imgRatio,
+  } = useContext(MyContext);
   const [editModalPos, setEditModalPos] = useState({
     x: 0,
     y: 0,
