@@ -8,6 +8,10 @@
   height: 100%;
 }
 
+.upload-image .image-bound .list-dot-wrapper {
+  position: absolute;
+}
+
 .upload-file-input label,
 .upload-file-input .save-all-button {
   background-color: #2e74df;

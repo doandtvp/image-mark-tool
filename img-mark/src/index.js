@@ -21,32 +21,41 @@ let defaultPropsPreview = {
 
 window.ImageMarkTool = {
   init: (props = defaultProps) => {
-    if (!rootApp) {
-      rootApp = document.createElement("div");
-      rootApp.id = "widget-image-map";
-      highestZindex = Math.max(
-        ...Array.from(document.querySelectorAll("body *"), (el) =>
-          parseFloat(window.getComputedStyle(el).zIndex)
-        ).filter((zIndex) => !Number.isNaN(zIndex)),
-        100
+    if (props.element) {
+      const imgurl = props.element.src;
+      const listMark = JSON.parse(props.element.getAttribute("lists")) || [];
+      if (!rootApp) {
+        rootApp = document.createElement("div");
+        rootApp.id = "widget-image-map";
+        highestZindex = Math.max(
+          ...Array.from(document.querySelectorAll("body *"), (el) =>
+            parseFloat(window.getComputedStyle(el).zIndex)
+          ).filter((zIndex) => !Number.isNaN(zIndex)),
+          100
+        );
+        rootApp.style.zIndex = `${highestZindex + 10}`;
+        document.body.appendChild(rootApp);
+      }
+
+      const root = createRoot(rootApp);
+
+      const unMountApp = () => {
+        rootApp.remove();
+        root.unmount();
+        rootApp = null;
+      };
+
+      root.render(
+        <StrictMode>
+          <App
+            defaultProps={props}
+            unMountApp={unMountApp}
+            imgurl={imgurl}
+            listMark={listMark}
+          />
+        </StrictMode>
       );
-      rootApp.style.zIndex = `${highestZindex + 10}`;
-      document.body.appendChild(rootApp);
     }
-
-    const root = createRoot(rootApp);
-
-    const unMountApp = () => {
-      rootApp.remove();
-      root.unmount();
-      rootApp = null;
-    };
-
-    root.render(
-      <StrictMode>
-        <App defaultProps={props} unMountApp={unMountApp} />
-      </StrictMode>
-    );
   },
   preview: (props = defaultPropsPreview) => {
     if (props.element.length > 0) {

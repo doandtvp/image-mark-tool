@@ -17,7 +17,7 @@ function Preview({
   const [zoom, setZoom] = useState(1);
   const [isDisplay, setIsDisplay] = useState("block");
   const titleRef = useRef({});
-  const { listDataMap, file, unMountApp, imgRatio } = useContext(MyContext);
+  const { listDataMap, file, unMountApp } = useContext(MyContext);
   const [listDataAddress, setLisDataAddress] = useState([]);
   const [isShow, setIsShow] = useState(true);
   const [imgStyle, setImageStyle] = useState({});
@@ -47,7 +47,6 @@ function Preview({
       transform: `translate(${checkCondition ? newX + 8 : newX + 3}%, ${
         checkCondition ? newY - 4 : newY - 3
       }%)`,
-      transition: "all 1s ease-in-out",
     });
   };
 
@@ -72,7 +71,7 @@ function Preview({
             {imgUrl ? (
               <div></div>
             ) : (
-              <button onClick={() => setToggleTab(true)}>Chỉnh Sửa</button>
+              <button onClick={() => setToggleTab("editor")}>Chỉnh Sửa</button>
             )}
             <button onClick={handleCloseApp}>Đóng</button>
           </div>
@@ -80,7 +79,6 @@ function Preview({
             className="image-bound"
             style={{
               transform: `scale(${zoom})`,
-              transition: "all 1s ease-in-out",
             }}
           >
             <img
@@ -94,12 +92,10 @@ function Preview({
               listDataAddress.map((item) => (
                 <div className="preview-wraper" key={item.id}>
                   <div
+                    className="preview-item"
                     style={{
-                      position: "absolute",
                       top: `${item.y}%`,
                       left: `${item.x}%`,
-                      transition: "all 1s ease-in-out",
-                      width: "100%",
                       display: isDisplay,
                     }}
                   >
@@ -115,7 +111,6 @@ function Preview({
                         ref={titleRef}
                         onClick={() => selectAddress(item)}
                         style={{
-                          cursor: "pointer",
                           top: item.addressPosititon.y,
                           left: item.addressPosititon.x,
                           transform: `translate(${item.linePosition.x}%, ${item.linePosition.y}%)`,
@@ -139,7 +134,6 @@ function Preview({
               setImageStyle={setImageStyle}
               selectAddress={selectAddress}
               setIsDisplay={setIsDisplay}
-              imgRatio={imgRatio}
             />
           )}
           <MobileList listData={listDataAddress} />

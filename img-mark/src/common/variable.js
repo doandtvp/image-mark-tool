@@ -1,0 +1,11 @@
+export const maxPercentWith = 40;
+export const maxPercentHeigth = 75;
+export const maxTitlePosition = 95;
+export const defaultMinTitlePosition = 60;
+export const defaultMaxTitlePosition = -200;
+export const maxPercentBound = 80;
+export const minPercentBound = 20;
+export const pointZoomPositionTop = 40;
+export const pointZoomPositionLeft = 74;
+export const pointZoomPositionTopMax = 28;
+export const pointZoomPositionLeftMax = 77;

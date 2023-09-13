@@ -42,12 +42,10 @@ function AddressLabel({ item, editItem, deleteItem }) {
 
   return (
     <div
+      className="address-label-wrapper"
       style={{
-        position: "absolute",
         top: `${item.y}%`,
         left: `${item.x}%`,
-        width: 0,
-        height: 0,
       }}
     >
       <div

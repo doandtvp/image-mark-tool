@@ -1,4 +1,9 @@
-.address-label {
+.address-label-wrapper {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+.address-label-wrapper .address-label {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
@@ -7,11 +12,11 @@
   z-index: 20;
 }
 
-.address-label:hover {
+.address-label-wrapper .address-label:hover {
   cursor: grab;
 }
 
-.address-label .title .address-title {
+.address-label-wrapper .address-label .title .address-title {
   width: 100%;
   font-family: "Silk Serif Regular";
   font-weight: 300;
@@ -23,15 +28,15 @@
   margin: 0;
 }
 
-.address-label .btn-group {
+.address-label-wrapper .address-label .btn-group {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   margin-top: 5px;
 }
 
-.address-label .btn-group .edit-button,
-.address-label .btn-group .delete-button {
+.address-label-wrapper .address-label .btn-group .edit-button,
+.address-label-wrapper .address-label .btn-group .delete-button {
   margin: 0 5px 0 0;
   border: none;
   padding: 10px 20px;
@@ -45,6 +50,6 @@
   font-weight: 500;
 }
 
-.address-label .btn-group .edit-btn {
+.address-label-wrapper .address-label .btn-group .edit-btn {
   min-width: 115px;
 }

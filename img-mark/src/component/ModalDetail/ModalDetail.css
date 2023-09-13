@@ -73,6 +73,7 @@
 
 .modal-detail .preview-title {
   font-size: 35px;
+  cursor: pointer;
 }
 
 .slider-button {
@@ -191,7 +192,9 @@
 .modal-mark {
   animation: cssAnimation 0s 1s forwards;
   opacity: 0;
-  transition: "all 1s ease-in-out";
+  transition: all 1s ease-in-out;
+  position: absolute;
+  width: 100%;
 }
 
 .modal-mark .white-mark {

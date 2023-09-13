@@ -4,6 +4,11 @@ import AddressLabel from "../AddressLabel/AddressLabel";
 import "./UploadImage.css";
 import ModalConfirmDelete from "../ModalConfirmDelete/ModalConfirmDelete";
 import { MyContext } from "../../ContextProvider";
+import {
+  defaultMaxTitlePosition,
+  defaultMinTitlePosition,
+  maxTitlePosition,
+} from "../../common/variable";
 
 function UploadImage({ setToggleTab }) {
   const [x, setX] = useState(-1);
@@ -14,14 +19,8 @@ function UploadImage({ setToggleTab }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [currentItem, setCurrentItem] = useState({});
   const [listDots, setListDots] = useState([]);
-  const {
-    listDataMap,
-    setListDataMap,
-    file,
-    unMountApp,
-    defaultProps,
-    imgRatio,
-  } = useContext(MyContext);
+  const { listDataMap, setListDataMap, file, unMountApp, defaultProps } =
+    useContext(MyContext);
   const [editModalPos, setEditModalPos] = useState({
     x: 0,
     y: 0,
@@ -66,8 +65,14 @@ function UploadImage({ setToggleTab }) {
       title: addressInfro.title,
       description: addressInfro.description,
       addressPosititon: {
-        x: x > 96 ? -200 : 60,
-        y: y > 96 ? -200 : 60,
+        x:
+          x > maxTitlePosition
+            ? defaultMaxTitlePosition
+            : defaultMinTitlePosition,
+        y:
+          y > maxTitlePosition
+            ? defaultMaxTitlePosition
+            : defaultMinTitlePosition,
       },
       linePosition: {
         x: -50,
@@ -167,7 +172,10 @@ function UploadImage({ setToggleTab }) {
     <div className="upload-image">
       <div className="upload-title upload-title-edit">
         <div className="upload-file-input">
-          <button className="preview-btn" onClick={() => setToggleTab(false)}>
+          <button
+            className="preview-btn"
+            onClick={() => setToggleTab("preview")}
+          >
             Xem Trước
           </button>
           <button
@@ -193,8 +201,8 @@ function UploadImage({ setToggleTab }) {
             listDots.length > 0 &&
             listDots.map((item, index) => (
               <div
+                className="list-dot-wrapper"
                 style={{
-                  position: "absolute",
                   top: `${item.y}%`,
                   left: `${item.x}%`,
                 }}

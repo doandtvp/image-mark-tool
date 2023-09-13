@@ -4,6 +4,14 @@ import bottle from "../../access/img/botte.jpg";
 import arrow from "../../access/icons/icon-arrow.png";
 import "./ModalDetail.css";
 import Line from "../Line";
+import {
+  maxPercentBound,
+  minPercentBound,
+  pointZoomPositionLeft,
+  pointZoomPositionLeftMax,
+  pointZoomPositionTop,
+  pointZoomPositionTopMax,
+} from "../../common/variable";
 
 function ModalDetail({
   currentAddress,
@@ -14,14 +22,13 @@ function ModalDetail({
   setImageStyle,
   selectAddress,
   setIsDisplay,
-  imgRatio,
 }) {
   const currentIndex = listData.findIndex((x) => x.id === currentAddress.id);
   const checkCondition =
-    currentAddress.x > 20 &&
-    currentAddress.x < 80 &&
-    currentAddress.y > 20 &&
-    currentAddress.y < 80;
+    currentAddress.x > minPercentBound &&
+    currentAddress.x < maxPercentBound &&
+    currentAddress.y > minPercentBound &&
+    currentAddress.y < maxPercentBound;
   const [addressTransform, setAddressTransform] = useState({
     x: 0,
     y: -50,
@@ -128,10 +135,12 @@ function ModalDetail({
       <div
         className="modal-mark"
         style={{
-          position: "absolute",
-          top: `${checkCondition ? 40 : 28}%`,
-          left: `${checkCondition ? 74 : 77}%`,
-          width: "100%",
+          top: `${
+            checkCondition ? pointZoomPositionTop : pointZoomPositionTopMax
+          }%`,
+          left: `${
+            checkCondition ? pointZoomPositionLeft : pointZoomPositionLeftMax
+          }%`,
         }}
       >
         <div>
@@ -144,7 +153,6 @@ function ModalDetail({
           <h3
             className="preview-title"
             style={{
-              cursor: "pointer",
               top: currentAddress.addressPosititon.y,
               left: currentAddress.addressPosititon.x,
               transform: `translate(${addressTransform.x}%, ${addressTransform.y}%)`,

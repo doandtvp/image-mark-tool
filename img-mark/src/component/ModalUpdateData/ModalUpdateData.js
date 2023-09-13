@@ -1,6 +1,7 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./ModalUpdateData.css";
-import { getVisibleDimensions } from "../../common/getVisibleDimensions";
+import { maxPercentHeigth, maxPercentWith } from "../../common/variable";
+import { useFocus } from "../../common/useFocus";
 
 function ModalUpdateData(props) {
   const {
@@ -19,36 +20,47 @@ function ModalUpdateData(props) {
 
   const [modalStyle, setModalStyle] = useState({});
   const wrapperRef = useRef();
+  const [inputRef, setInputFocus] = useFocus();
+
+  useEffect(() => {
+    if (isShowModal && x && y) {
+      setInputFocus();
+    }
+  }, [isShowModal, x, y]);
 
   useEffect(() => {
     if (!isEdit) {
       setModalStyle({
-        top: `${y > 40 ? "unset" : y + 2 + "%"}`,
-        bottom: `${y > 40 ? 100 - y + 2 + "%" : "unset"}`,
-        left: `${x > 75 ? "unset" : x + 1 + "%"}`,
-        right: `${x > 75 ? 100 - x + 1 + "%" : "unset"}`,
-        transition: "all 0.5s ease",
+        top: `${y > maxPercentWith ? "unset" : y + 2 + "%"}`,
+        bottom: `${y > maxPercentWith ? 100 - y + 2 + "%" : "unset"}`,
+        left: `${x > maxPercentHeigth ? "unset" : x + 1 + "%"}`,
+        right: `${x > maxPercentHeigth ? 100 - x + 1 + "%" : "unset"}`,
       });
     } else {
       setModalStyle({
         top: `${
-          editModalPos.y + 420 > imgRef.current.clientHeight
+          editModalPos.y + wrapperRef.current.clientHeight >
+          imgRef.current.clientHeight
             ? editModalPos.y -
-              (editModalPos.y + 420 - imgRef.current.clientHeight) -
+              (editModalPos.y +
+                wrapperRef.current.clientHeight -
+                imgRef.current.clientHeight) -
               50
             : editModalPos.y
         }px`,
         left: `${
-          editModalPos.x + 400 > imgRef.current.clientWidth
+          editModalPos.x + wrapperRef.current.clientWidth >
+          imgRef.current.clientWidth
             ? editModalPos.x -
-              (editModalPos.x + 400 - imgRef.current.clientWidth) -
+              (editModalPos.x +
+                wrapperRef.current.clientWidth -
+                imgRef.current.clientWidth) -
               50
             : editModalPos.x
         }px`,
-        transition: "all 0.5s ease",
       });
     }
-  }, [x, y, editModalPos, isEdit, imgRef]);
+  }, [x, y, editModalPos, isEdit, imgRef, wrapperRef]);
 
   useEffect(() => {
     const checkIfClickedOutside = (e) => {
@@ -82,7 +94,7 @@ function ModalUpdateData(props) {
           type="text"
           name="title"
           value={addressInfro.title}
-          autoFocus
+          ref={inputRef}
           onChange={(e) => handleChange(e)}
         />
       </div>
