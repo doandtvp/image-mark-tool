@@ -27,6 +27,7 @@ window.ImageMarkTool = {
       if (!rootApp) {
         rootApp = document.createElement("div");
         rootApp.id = "widget-image-map";
+        rootApp.style.position = "relative";
         highestZindex = Math.max(
           ...Array.from(document.querySelectorAll("body *"), (el) =>
             parseFloat(window.getComputedStyle(el).zIndex)

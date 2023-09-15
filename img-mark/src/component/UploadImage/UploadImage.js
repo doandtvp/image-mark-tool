@@ -10,6 +10,7 @@ import {
   maxTitlePosition,
   statePreview,
 } from "../../common/variable";
+import EditToolBar from "../EditToolBar/EditToolBar";
 
 function UploadImage({ setToggleTab }) {
   const [x, setX] = useState(-1);
@@ -170,80 +171,72 @@ function UploadImage({ setToggleTab }) {
   };
 
   return (
-    <div className="upload-image">
-      <div className="upload-title upload-title-edit">
-        <div className="upload-file-input">
-          <button
-            className="preview-btn"
-            onClick={() => setToggleTab(statePreview)}
-          >
-            Xem Trước
-          </button>
-          <button
-            className="save-all-button can-save"
-            onClick={handleSaveLocal}
-          >
-            Lưu lại
-          </button>
+    <div className="w-full">
+      <div className="flex items-start justify-between">
+        <div className="max-w-[288px] w-full flex flex-col items-start self-stretch bg-white border-r border-r-borderRight">
+          <EditToolBar />
         </div>
-        <button onClick={handleCloseApp}>Đóng</button>
-      </div>
-
-      <div className="image-content">
-        <div className="image-bound">
-          <img
-            className="image-show"
-            ref={imgRef}
-            onClick={(e) => printCoordinates(e)}
-            src={file}
-            alt="input-img"
-          />
-          {listDots &&
-            listDots.length > 0 &&
-            listDots.map((item, index) => (
-              <div
-                className="list-dot-wrapper"
-                style={{
-                  top: `${item.y}%`,
-                  left: `${item.x}%`,
-                }}
-                key={index}
-              >
-                <div className="white-mark"></div>
-              </div>
-            ))}
-          {listDataMap && listDataMap.length > 0 && (
-            <React.Fragment>
-              {listDataMap.map((item) => (
-                <AddressLabel
-                  item={item}
-                  editItem={getEditItem}
-                  deleteItem={deleteItem}
-                  key={item.id}
-                />
+        <div className="flex-1 flex flex-col items-center pt-3 px-[116px] pb-[86px] gap-5 bg-wrapper">
+          <div>
+            <p className="text-base not-italic font-normal leading-normal text-description">
+              Nắm kéo để di chuyển các nút đã thêm
+            </p>
+          </div>
+          <div className="shadow-imgBox border border-description">
+            <img
+              className="image-show"
+              ref={imgRef}
+              onClick={(e) => printCoordinates(e)}
+              src={file}
+              alt="input-img"
+            />
+            {listDots &&
+              listDots.length > 0 &&
+              listDots.map((item, index) => (
+                <div
+                  className="list-dot-wrapper"
+                  style={{
+                    top: `${item.y}%`,
+                    left: `${item.x}%`,
+                  }}
+                  key={index}
+                >
+                  <div className="white-mark"></div>
+                </div>
               ))}
-            </React.Fragment>
-          )}
+            {listDataMap && listDataMap.length > 0 && (
+              <React.Fragment>
+                {listDataMap.map((item) => (
+                  <AddressLabel
+                    item={item}
+                    editItem={getEditItem}
+                    deleteItem={deleteItem}
+                    key={item.id}
+                  />
+                ))}
+              </React.Fragment>
+            )}
+          </div>
         </div>
-        <ModalUpdateData
-          x={x}
-          y={y}
-          addressInfro={addressInfro}
-          handleChange={handleChange}
-          handleCloseModal={handleCloseModal}
-          isShowModal={isShowModal}
-          isEdit={isEdit}
-          handleEdit={handleEdit}
-          addToListData={addToListData}
-          editModalPos={editModalPos}
-          imgRef={imgRef}
-        />
-        <ModalConfirmDelete
-          confirmDeleteItem={confirmDeleteItem}
-          setShowDeleteModal={setShowDeleteModal}
-          showDeleteModal={showDeleteModal}
-        />
       </div>
+      <ModalUpdateData
+        x={x}
+        y={y}
+        addressInfro={addressInfro}
+        handleChange={handleChange}
+        handleCloseModal={handleCloseModal}
+        isShowModal={isShowModal}
+        isEdit={isEdit}
+        handleEdit={handleEdit}
+        addToListData={addToListData}
+        editModalPos={editModalPos}
+        imgRef={imgRef}
+      />
+      <ModalConfirmDelete
+        confirmDeleteItem={confirmDeleteItem}
+        setShowDeleteModal={setShowDeleteModal}
+        showDeleteModal={showDeleteModal}
+      />
     </div>
   );
 }

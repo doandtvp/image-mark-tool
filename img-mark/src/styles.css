@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 @font-face {
   font-family: "Silk Serif";
   src: url("fonts/silk-serif/Silk-Serif-ExtraLight.otf");
@@ -20,36 +24,6 @@
 
 body {
   margin: 0;
-}
-
-#widget-image-map {
-  position: relative;
-}
-
-.widget-image-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  height: 99%;
-  background-color: rgba(0, 0, 0, 0.45);
-  pointer-events: none;
-}
-
-.widget-image-wrap {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  overflow: auto;
-  outline: 0;
-  -webkit-overflow-scrolling: touch;
-}
-
-#widget-image-map .widget-image-container {
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
 }
 
 .preview-title {

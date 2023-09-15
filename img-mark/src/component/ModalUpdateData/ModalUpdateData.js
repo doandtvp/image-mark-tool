@@ -88,7 +88,7 @@ function ModalUpdateData(props) {
       ref={wrapperRef}
     >
       <div className="data-fields">
-        <h3 className="input-labels">Tiêu Đề</h3>
+        <h3 className="input-labels text-3xl">Tiêu Đề</h3>
         <input
           className="address-input"
           type="text"
