@@ -5,12 +5,8 @@ import arrow from "../../access/icons/icon-arrow.png";
 import "./ModalDetail.css";
 import Line from "../Line";
 import {
-  maxPercentBound,
-  minPercentBound,
   pointZoomPositionLeft,
-  pointZoomPositionLeftMax,
   pointZoomPositionTop,
-  pointZoomPositionTopMax,
 } from "../../common/variable";
 
 function ModalDetail({
@@ -24,11 +20,7 @@ function ModalDetail({
   setIsDisplay,
 }) {
   const currentIndex = listData.findIndex((x) => x.id === currentAddress.id);
-  const checkCondition =
-    currentAddress.x > minPercentBound &&
-    currentAddress.x < maxPercentBound &&
-    currentAddress.y > minPercentBound &&
-    currentAddress.y < maxPercentBound;
+  const [isShowTitle, setIsShowTitlte] = useState(false);
   const [addressTransform, setAddressTransform] = useState({
     x: 0,
     y: -50,
@@ -36,9 +28,15 @@ function ModalDetail({
 
   useEffect(() => {
     selectAddress(currentAddress);
+    const timer = setTimeout(() => {
+      setIsShowTitlte(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, [currentAddress]);
 
   const handleGetIndex = (isNext) => {
+    setIsShowTitlte(false);
     if (isNext) {
       if (currentIndex + 1 === listData.length) {
         setCurrentAddress(listData[0]);
@@ -58,7 +56,9 @@ function ModalDetail({
     setIsShowModal(isClose);
     setZoom(1);
     setImageStyle({});
-    setIsDisplay("block");
+    setTimeout(() => {
+      setIsDisplay("block");
+    }, 1000);
   };
 
   return (
@@ -135,15 +135,14 @@ function ModalDetail({
       <div
         className="modal-mark"
         style={{
-          top: `${
-            checkCondition ? pointZoomPositionTop : pointZoomPositionTopMax
-          }%`,
-          left: `${
-            checkCondition ? pointZoomPositionLeft : pointZoomPositionLeftMax
-          }%`,
+          top: `${pointZoomPositionTop}%`,
+          left: `${pointZoomPositionLeft}%`,
         }}
       >
-        <div>
+        <div
+          className="modal-mark-wrapper"
+          style={{ opacity: `${isShowTitle ? 1 : 0}` }}
+        >
           <div className="white-mark"></div>
           <Line
             source={{ x: 0, y: 0 }}

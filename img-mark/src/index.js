@@ -55,6 +55,8 @@ window.ImageMarkTool = {
           />
         </StrictMode>
       );
+    } else {
+      alert('Bạn chưa upload ảnh!')
     }
   },
   preview: (props = defaultPropsPreview) => {

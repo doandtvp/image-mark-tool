@@ -10,6 +10,5 @@
 }
 .preview-image .preview-wraper .preview-item {
   position: absolute;
-  transition: all 1s ease-in-out;
   width: 100%;
 }

@@ -4,6 +4,14 @@ import "./Preview.css";
 import Line from "../Line";
 import MobileList from "../MobileList/MobileList";
 import { MyContext } from "../../ContextProvider";
+import {
+  maxZoomImage,
+  minPercentModal,
+  scaleLeft,
+  scaleTop,
+  stateEditor,
+} from "../../common/variable";
+import { useZoom } from "../../common/useZoom";
 
 function Preview({
   setToggleTab,
@@ -34,19 +42,11 @@ function Preview({
     setCurrentAddress(item);
     setIsDisplay("none");
     setIsShowModal(true);
-    const checkCondition =
-      item.x > 20 && item.x < 80 && item.y > 20 && item.y < 80;
-    if (checkCondition) {
-      setZoom(3);
-    } else {
-      setZoom(8);
-    }
-    const newX = 50 - item.x;
-    const newY = 50 - item.y;
+    setZoom(maxZoomImage);
+    const newX = minPercentModal - item.x;
+    const newY = minPercentModal - item.y;
     setImageStyle({
-      transform: `translate(${checkCondition ? newX + 8 : newX + 3}%, ${
-        checkCondition ? newY - 4 : newY - 3
-      }%)`,
+      transform: `translate(${newX + scaleLeft}%, ${newY - scaleTop}%)`,
     });
   };
 
@@ -71,7 +71,9 @@ function Preview({
             {imgUrl ? (
               <div></div>
             ) : (
-              <button onClick={() => setToggleTab("editor")}>Chỉnh Sửa</button>
+              <button onClick={() => setToggleTab(stateEditor)}>
+                Chỉnh Sửa
+              </button>
             )}
             <button onClick={handleCloseApp}>Đóng</button>
           </div>
@@ -96,7 +98,10 @@ function Preview({
                     style={{
                       top: `${item.y}%`,
                       left: `${item.x}%`,
-                      display: isDisplay,
+                      opacity: `${isDisplay === "block" ? 1 : 0}`,
+                      transition: `all ${
+                        isDisplay === "block" ? 1 : 0
+                      }s ease-in-out`,
                     }}
                   >
                     <div>

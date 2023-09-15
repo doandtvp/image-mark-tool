@@ -8,6 +8,7 @@ import {
   defaultMaxTitlePosition,
   defaultMinTitlePosition,
   maxTitlePosition,
+  statePreview,
 } from "../../common/variable";
 
 function UploadImage({ setToggleTab }) {
@@ -174,7 +175,7 @@ function UploadImage({ setToggleTab }) {
         <div className="upload-file-input">
           <button
             className="preview-btn"
-            onClick={() => setToggleTab("preview")}
+            onClick={() => setToggleTab(statePreview)}
           >
             Xem Trước
           </button>
